@@ -10,29 +10,53 @@ void countdown(std::atomic<bool>& running)
     running = false;
 }
 
+void resizeFrameBuffer(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
 int main()
 {
-    WindowSettings Settings = WindowSettings();
-
+    // GLFW Window Initiation
     if (!glfwInit())
     {
         std::cout << "Startup Error has occured";
         return 1;
     }
-    std::atomic <bool> running = true;
+
+    WindowSettings Settings = WindowSettings();
 
     GLFWwindow* window = glfwCreateWindow(Settings.width, Settings.height, Settings.title, Settings.monitor, Settings.share);
 
-    std::thread t1(countdown, std::ref(running));
-    
-    // Frames
-    while (!glfwWindowShouldClose(window) && running)
+    if (window == NULL)
     {
-        glfwPollEvents();
-        glfwSwapBuffers(window);  
+        std::cout << "Window failed to instantiate" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+
+    // GLAD Initiation (Manages Function Pointers)
+    // 'glfwGetProcAddress' Allows for Portability across OS
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return -1;
     }
 
-    running = false; // Ensure this flag is 0, incase the above while loop closed from the user closing the window
+    glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
+    glfwSetFramebufferSizeCallback(window, resizeFrameBuffer);
+
+    std::thread t1(countdown, std::ref(running));
+    
+    // Draw Frames
+    while (!glfwWindowShouldClose(window) && running)
+    {
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+    running = false; // Ensure this flag is 0, in case the above while loop closed from the user closing the window
 
     t1.join();
 
