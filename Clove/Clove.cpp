@@ -15,6 +15,12 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+void processExitInput(GLFWwindow* window)
+{
+    if (glfwGetKey(window, GLFW_KEY_F4) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
 int main()
 {
     // GLFW Window Initiation
@@ -37,8 +43,7 @@ int main()
     glfwMakeContextCurrent(window);
 
     // GLAD Initiation (Manages Function Pointers)
-    // 'glfwGetProcAddress' Allows for Portability across OS
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) // 'glfwGetProcAddress' Allows for Portability across different OS
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
@@ -49,9 +54,14 @@ int main()
 
     std::thread t1(countdown, std::ref(running));
     
-    // Draw Frames
+    // Tick 
     while (!glfwWindowShouldClose(window) && running)
     {
+        processExitInput(window);
+
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

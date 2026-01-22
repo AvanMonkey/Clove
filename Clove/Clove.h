@@ -19,5 +19,13 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height);
 /// <param name="running"> - Is Program Running?</param>
 void countdown(std::atomic<bool>& running);
 
+/// <summary>
+/// End Program if User Presses F4
+/// </summary>
+void processExitInput(GLFWwindow* window);
+
+/// <summary>
+/// Is the App Running?
+/// </summary>
 std::atomic <bool> running = true;
 
