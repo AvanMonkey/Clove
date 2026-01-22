@@ -56,6 +56,9 @@ int main()
 
     std::thread t1(countdown, std::ref(running));
     
+    createShaders();
+    objectLinker();
+
     // Tick 
     while (!glfwWindowShouldClose(window) && running)
     {
