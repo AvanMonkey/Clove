@@ -1,6 +1,7 @@
 #include "Renderer.h"
 
-unsigned int shaderProgram, vertexShader, fragmentShader, VAO, VBO, EBO;
+unsigned int shaderProgram, VAO, VBO, EBO;
+const void* byteOffset = nullptr;
 
 const char* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 aPos;\n"
@@ -13,7 +14,7 @@ const char* fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
 "void main()\n"
 "{\n"
-"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"	FragColor = vec4(1.0f, 0.0f, 0.4549f, 1.0f);\n"
 "}\0";
 
 float vertices[] =
@@ -32,6 +33,8 @@ unsigned int indices[] =
 
 void createShaders()
 {
+	unsigned int vertexShader, fragmentShader;
+
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
@@ -44,6 +47,19 @@ void createShaders()
 	glAttachShader(shaderProgram, vertexShader);
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);
+
+	/// Check if there are any rendering issues during early development
+	int  success;
+	char infoLog[512];
+	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+
+	if (!success)
+	{
+		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		std::string errormsg = "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n";
+		errormsg += infoLog;
+		throw std::runtime_error(errormsg);
+	}
 
 	// These are no longer needed
 	glDeleteShader(vertexShader);
@@ -64,10 +80,10 @@ void objectLinker()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	int vertexLocation = 0;
-	int vertexSize = 3;
-	int stride = 3; // The space  between consectuive vertex attributes
-	glVertexAttribPointer(vertexLocation, vertexSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)0);
+	unsigned int vertexLocation = 0;
+	unsigned int vertexSize = 3;
+	unsigned int stride = 3; // The space  between consectuive vertex attributes
+	glVertexAttribPointer(vertexLocation, vertexSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), byteOffset);
 	glEnableVertexAttribArray(0);
 }
 
@@ -78,19 +94,13 @@ void renderer(GLFWwindow* window)
 
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+	// Outline Only
+	/*
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	*/
+
+	unsigned int numberOfVertices = 6; 
+	glDrawElements(GL_TRIANGLES, numberOfVertices, GL_UNSIGNED_INT, byteOffset);
 	glBindVertexArray(0);
-
-	/// Check if there are any rendering issues during early development
-	int  success;
-	char infoLog[512];
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-
-	if (!success)
-	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::string errormsg = "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n";
-		errormsg += infoLog;
-		throw std::runtime_error(errormsg);
-	}
 }

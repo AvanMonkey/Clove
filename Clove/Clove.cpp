@@ -2,9 +2,9 @@
 
 void countdown(std::atomic<bool>& running) 
 {
-    for (int i = 1; i < 11 && running; i++)
+    for (int timer = 1; timer < 16 && running; timer++)
     {
-        std::cout << i << std::endl;
+        std::cout << timer << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     running = false;

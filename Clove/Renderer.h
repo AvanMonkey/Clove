@@ -33,3 +33,6 @@ extern unsigned int fragmentShader;
 
 /// \brief Combine Vertex & Fragment Shaders to Render Objects
 extern unsigned int shaderProgram;
+
+// \brief Offset Between elements in EBO
+extern const void* byteOffset;
