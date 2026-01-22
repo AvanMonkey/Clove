@@ -18,12 +18,8 @@ void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject)
 /// \brief Vertex Shader Source Code Written in GLSL
 extern const char* vertexShaderSource;
 
-/// \brief Vertex Shader Object
-
-/// \brief Fragment Shader Source Code Written in GLSL
+/// \brief Colour the Shape Written in GLSL
 extern const char* fragmentShaderSource; 
-
-/// \brief Fragment Shader Object
 
 /// \brief Combine Vertex & Fragment Shaders to Render Objects
 extern unsigned int shaderProgram;
