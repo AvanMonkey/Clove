@@ -133,7 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clove.h" />
+    <ClInclude Include="Objects.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Shaders.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="WindowSettings.h" />
   </ItemGroup>

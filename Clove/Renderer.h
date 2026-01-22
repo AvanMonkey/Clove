@@ -1,38 +1,35 @@
 #pragma once
 #include "Clove.h"
+#include "Shaders.h"
 
-/// \brief The Main Method that Handles Vertex, Fragments & Shaders 
-void renderer(GLFWwindow* window);
+/// \brief The Main Method That Renders Visuals
+void renderer(GLFWwindow* window, VAO& ArrayObject);
+
+/// \brief End Process should user press exit key
+/// \param window Context Window </param>
+void processInput(GLFWwindow* window);
 
 /// \brief Instantiate Shaders
 void createShaders();
 
 /// \brief Instantiates VBO, VAO & EBO
-void objectLinker();
-
-/// \brief Vertex Buffer Object - Stores Vertices in GPU Memory </summary>
-extern unsigned int VBO;
-
-///  \brief Vertex Array Object - Stores the setup settings for objects in GPU Memory (Vertex Positions, Colours, Etc.)
-extern unsigned int VAO;
-
-/// \brief Element Buffer Objects - Allows for indexed drawing using indices to decide which vertices to draw
-extern unsigned int EBO;
+void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject);
 
 /// \brief Vertex Shader Source Code Written in GLSL
 extern const char* vertexShaderSource;
 
 /// \brief Vertex Shader Object
-extern unsigned int vertexShader;
 
 /// \brief Fragment Shader Source Code Written in GLSL
 extern const char* fragmentShaderSource; 
 
 /// \brief Fragment Shader Object
-extern unsigned int fragmentShader;
 
 /// \brief Combine Vertex & Fragment Shaders to Render Objects
 extern unsigned int shaderProgram;
 
 // \brief Offset Between elements in EBO
 extern const void* byteOffset;
+
+// \brief Shape's Fill Property
+extern bool fill;

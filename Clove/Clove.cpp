@@ -1,4 +1,6 @@
 #include "Clove.h"
+#include "Shaders.h"
+bool fill = true;
 
 void countdown(std::atomic<bool>& running) 
 {
@@ -15,10 +17,17 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void processExitInput(GLFWwindow* window)
+void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject)
 {
-    if (glfwGetKey(window, GLFW_KEY_F4) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    while (!glfwWindowShouldClose(window) && running)
+    {
+        processInput(window);
+
+        renderer(window, ArrayObject);
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
 }
 
 int main()
@@ -51,24 +60,22 @@ int main()
 
     std::atomic <bool> running = true;
 
+    // Temp
     std::thread t1(countdown, std::ref(running));
     
+    // Our Objects that store data about vertices, indices and their settings in the GPU
+    VAO ArrayObject;
+    VBO BufferObject;
+    EBO ElementBufferObject;
+
     createShaders();
-    objectLinker();
+    objectLinker(ArrayObject, BufferObject, ElementBufferObject);
 
-    // Tick 
-    while (!glfwWindowShouldClose(window) && running)
-    {
-        processExitInput(window);
-
-        renderer(window);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
+    Tick(window, running, ArrayObject);
 
     running = false; // Ensure this flag is 0, in case the above while loop closed from the user closing the window
 
+    // Temp
     t1.join();
 
     glfwDestroyWindow(window);
