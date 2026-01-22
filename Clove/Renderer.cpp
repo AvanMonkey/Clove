@@ -64,10 +64,10 @@ void objectLinker()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	int vertextLocation = 0;
+	int vertexLocation = 0;
 	int vertexSize = 3;
 	int stride = 3; // The space  between consectuive vertex attributes
-	glVertexAttribPointer(vertextLocation, vertexSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)0);
+	glVertexAttribPointer(vertexLocation, vertexSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 }
 
@@ -82,13 +82,15 @@ void renderer(GLFWwindow* window)
 	glBindVertexArray(0);
 
 	/// Check if there are any rendering issues during early development
-	/*int  success;
+	int  success;
 	char infoLog[512];
 	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
 
 	if (!success)
 	{
 		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}*/
+		std::string errormsg = "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n";
+		errormsg += infoLog;
+		throw std::runtime_error(errormsg);
+	}
 }

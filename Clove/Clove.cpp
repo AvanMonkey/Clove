@@ -26,8 +26,7 @@ int main()
     // GLFW Window Initiation
     if (!glfwInit())
     {
-        std::cout << "Startup Error has occured";
-        return 1;
+        throw std::runtime_error("Failed to Startup");
     }
 
     WindowSettings Settings = WindowSettings();
@@ -36,17 +35,15 @@ int main()
 
     if (window == NULL)
     {
-        std::cout << "Window failed to instantiate" << std::endl;
         glfwTerminate();
-        return -1;
+        throw std::runtime_error("Failed to initialize Window");
     }
     glfwMakeContextCurrent(window);
 
     // GLAD Initiation (Manages Function Pointers)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) // 'glfwGetProcAddress' Allows for Portability across different OS
     {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
+        throw std::runtime_error("Failed to initialize GLAD");
     }
 
     glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
