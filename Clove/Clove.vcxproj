@@ -128,9 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Clove.cpp" />
+    <ClCompile Include="dependencies\include\glad\glad.c" />
+    <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clove.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="WindowSettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

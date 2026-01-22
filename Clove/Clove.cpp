@@ -52,6 +52,8 @@ int main()
     glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
     glfwSetFramebufferSizeCallback(window, resizeFrameBuffer);
 
+    std::atomic <bool> running = true;
+
     std::thread t1(countdown, std::ref(running));
     
     // Tick 
@@ -59,8 +61,7 @@ int main()
     {
         processExitInput(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        renderer(window);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
