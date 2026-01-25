@@ -21,8 +21,6 @@ void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject)
 {
     while (!glfwWindowShouldClose(window) && running)
     {
-        processKeyboardInput(window);
-
         renderer(window, ArrayObject);
 
         glfwSwapBuffers(window);
@@ -68,11 +66,13 @@ int main()
         throw e;
     }
 
-    // Setup Window Settings and Mouse Input
+    // Setup Window Settings
     glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
     glfwSetFramebufferSizeCallback(window, resizeFrameBuffer);
-    glfwSetMouseButtonCallback(window, processMouseInput);
 
+    // Setup Mouse and Keyboard Inputs
+    glfwSetMouseButtonCallback(window, processMouseInput);
+    glfwSetKeyCallback(window, processKeyboardInput);
 
     std::atomic <bool> running = true;
 
