@@ -1,6 +1,5 @@
 #include "Clove.h"
 #include "Shaders.h"
-bool fill = true;
 
 void countdown(std::atomic<bool>& running) 
 {
@@ -79,14 +78,13 @@ int main()
     // Temp
     std::thread t1(countdown, std::ref(running));
 
-    createShaders();
-
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Shapes will originally be Outlines
     // Our Objects that store data about vertices, indices and their settings in the GPU
     VAO ArrayObject;
     VBO BufferObject;
     EBO ElementBufferObject;
+    createShaders();
     objectLinker(ArrayObject, BufferObject, ElementBufferObject);
-
     Tick(window, running, ArrayObject);
 
     running = false; // Ensure this flag is 0, in case the above while loop closed from the user closing the window

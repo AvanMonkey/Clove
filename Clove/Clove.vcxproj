@@ -130,15 +130,17 @@
     <ClCompile Include="Clove.cpp" />
     <ClCompile Include="dependencies\include\glad\glad.c" />
     <ClCompile Include="InputHandlers.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clove.h" />
     <ClInclude Include="InputHandlers.h" />
     <ClInclude Include="Objects.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shaders.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="WindowSettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

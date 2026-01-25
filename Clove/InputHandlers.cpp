@@ -1,5 +1,6 @@
 #include "InputHandlers.h"
 
+bool fill = false;
 // Code adapted from GLFW (2026) https://www.glfw.org/docs/3.3/input_guide.html 
 void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
