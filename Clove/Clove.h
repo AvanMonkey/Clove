@@ -4,6 +4,8 @@
 #include "WindowSettings.h"
 #include "Vertex.h"
 #include "Renderer.h"
+#include "Shaders.h"
+#include "InputHandlers.h"
 #include <iostream>
 #include <thread>
 #include <chrono>

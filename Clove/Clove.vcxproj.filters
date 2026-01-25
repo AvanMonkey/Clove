@@ -24,6 +24,9 @@
     <ClCompile Include="dependencies\include\glad\glad.c">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="InputHandlers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowSettings.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandlers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

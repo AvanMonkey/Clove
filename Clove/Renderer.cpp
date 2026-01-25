@@ -31,25 +31,6 @@ unsigned int indices[] =
 	1, 2, 3
 };
 
-void processInput(GLFWwindow* window)
-{
-	static bool waitCondition = false;  // Prevents state change from holding enter key, instead the user will have to press the Enter Key each time they wish to change state.
-	bool enterKeyPressed = glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS;
-
-	if (glfwGetKey(window, GLFW_KEY_F4) == GLFW_PRESS)
-	{
-		(glfwSetWindowShouldClose(window, true));
-	}
-
-	if (enterKeyPressed && !waitCondition)
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, fill ? GL_LINE : GL_FILL);
-		fill = !fill;
-	}
-
-	waitCondition = enterKeyPressed; // Make True when key is pressed so loop is not repeated until enter is pressed again.
-}
-
 void createShaders()
 {
 	Shader vertexShader(vertexShaderSource, GL_VERTEX_SHADER), fragmentShader(fragmentShaderSource, GL_FRAGMENT_SHADER);

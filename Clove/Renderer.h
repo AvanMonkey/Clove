@@ -1,13 +1,8 @@
 #pragma once
 #include "Clove.h"
-#include "Shaders.h"
 
 /// \brief The Main Method That Renders Visuals
 void renderer(GLFWwindow* window, VAO& ArrayObject);
-
-/// \brief End Process should user press exit key
-/// \param window Context Window </param>
-void processInput(GLFWwindow* window);
 
 /// \brief Instantiate Shaders
 void createShaders();

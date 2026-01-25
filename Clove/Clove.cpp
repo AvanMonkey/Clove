@@ -21,7 +21,7 @@ void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject)
 {
     while (!glfwWindowShouldClose(window) && running)
     {
-        processInput(window);
+        processKeyboardInput(window);
 
         renderer(window, ArrayObject);
 
@@ -49,26 +49,42 @@ int main()
     }
     glfwMakeContextCurrent(window);
 
+
+
     // GLAD Initiation (Manages Function Pointers)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) // 'glfwGetProcAddress' Allows for Portability across different OS
     {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
+    // Set Default Cursor to crosshair
+    try
+    {
+        GLFWcursor* cursor = glfwCreateStandardCursor(GLFW_CROSSHAIR_CURSOR);
+        glfwSetCursor(window, cursor);
+    }
+    catch (const std::exception& e)
+    {
+        throw e;
+    }
+
+    // Setup Window Settings and Mouse Input
     glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
     glfwSetFramebufferSizeCallback(window, resizeFrameBuffer);
+    glfwSetMouseButtonCallback(window, processMouseInput);
+
 
     std::atomic <bool> running = true;
 
     // Temp
     std::thread t1(countdown, std::ref(running));
-    
+
+    createShaders();
+
     // Our Objects that store data about vertices, indices and their settings in the GPU
     VAO ArrayObject;
     VBO BufferObject;
     EBO ElementBufferObject;
-
-    createShaders();
     objectLinker(ArrayObject, BufferObject, ElementBufferObject);
 
     Tick(window, running, ArrayObject);
