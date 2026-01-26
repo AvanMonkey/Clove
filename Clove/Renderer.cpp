@@ -9,14 +9,11 @@ void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject)
 	glEnableVertexAttribArray(0);
 }
 
-void renderer(GLFWwindow* window, VAO& ArrayObject, Shaders& shader)
+void renderer(GLFWwindow* window, VAO& ArrayObject)
 {
 	Rectangle rect; // Temporary, right now this is being created every frame but it doesnt matter right now
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	shader.use();
-	shader.setFloat("ourColour", 1.0f, 1.0f, 1.0f, 1.0f);
 	ArrayObject.bindArray();
 
 	rect.draw();

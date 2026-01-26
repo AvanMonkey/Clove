@@ -25,8 +25,10 @@ void countdown(std::atomic<bool>& running);
 /// \brief Do *Blank* every frame
 /// \param window Context Window
 /// \param running Is Program Running?
-void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject, Shaders& shader);
+void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject);
 
 /// \brief Is Program Running?
 extern std::atomic <bool> running;
 
+// \brief Points to shader object stored on the heap for global access
+extern Shaders* shader;

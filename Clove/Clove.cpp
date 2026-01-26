@@ -1,5 +1,7 @@
 #include "Clove.h"
 
+Shaders* shader; // We can't pass this into keyboard process inputs, so we will make a pointer and use that instead
+
 void countdown(std::atomic<bool>& running) 
 {
     for (int timer = 1; timer < 16 && running; timer++)
@@ -15,11 +17,11 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject, Shaders& shader)
+void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject)
 {
     while (!glfwWindowShouldClose(window) && running)
     {
-        renderer(window, ArrayObject, shader);
+        renderer(window, ArrayObject);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -68,9 +70,12 @@ int main()
     glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
     glfwSetFramebufferSizeCallback(window, resizeFrameBuffer);
 
+    // Create our shader program
+    shader = new Shaders(SHADER_PATH, FRAGMENT_PATH);
+
     // Setup Mouse and Keyboard Inputs
     glfwSetMouseButtonCallback(window, processMouseInput);
-    glfwSetKeyCallback(window, processKeyboardInput);
+    glfwSetKeyCallback(window,  processKeyboardInput);
 
     std::atomic <bool> running = true;
 
@@ -82,11 +87,11 @@ int main()
     VAO ArrayObject;
     VBO BufferObject;
     EBO ElementBufferObject;
-    // Create our shader program
-    Shaders shader(SHADER_PATH, FRAGMENT_PATH);
 
     objectLinker(ArrayObject, BufferObject, ElementBufferObject);
-    Tick(window, running, ArrayObject, shader);
+    Tick(window, running, ArrayObject);
+
+    delete shader; // Program has ended, free the memory
 
     running = false; // Ensure this flag is 0, in case the above while loop closed from the user closing the window
 

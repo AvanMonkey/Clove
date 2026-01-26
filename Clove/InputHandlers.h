@@ -8,3 +8,6 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 /// \brief Process User Mouse Inputs (Dragging Objects)
 /// \param window Context Window </param>
 void processMouseInput(GLFWwindow* window, int button, int action, int mods);
+
+// \brief Theme of app (Light/Dark Mode)
+extern bool lightMode;

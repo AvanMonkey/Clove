@@ -1,6 +1,7 @@
 #include "InputHandlers.h"
 
-bool fill = false;
+bool lightMode = false; // Start in dark mode
+
 // Code adapted from GLFW (2026) https://www.glfw.org/docs/3.3/input_guide.html 
 void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -15,8 +16,18 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 	// Shift Polygon view (Fill and Outline)
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 	{
-		glPolygonMode(GL_FRONT_AND_BACK, fill ? GL_LINE : GL_FILL);
-		fill = !fill;
+		shader->use();
+		if (lightMode)
+		{
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+			shader->setFloat("ourColour", 1.0f, 1.0f, 1.0f, 1.0f);
+		}
+		else
+		{
+			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+			shader->setFloat("ourColour", 0.0f, 0.0f, 0.0f, 1.0f);
+		}
+		lightMode = !lightMode;
 	}
 }
 
