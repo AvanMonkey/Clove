@@ -1,35 +1,110 @@
 #pragma once
+#ifndef SHADER_H
+#define SHADER_H
+
 #include <glad/glad.h>
+#include <string>
+#include <fstream>
+#include <sstream>
 #include <iostream>
 
-/// \brief Create Shaders for use in rendering
-class Shader
+/// \brief Create Shader Program through reading Vertex and Fragment Shader path files
+class Shaders
 {
 public:
-	Shader(const char* ShaderSource, GLenum shaderType) {
-		shader = glCreateShader(shaderType);
-		glShaderSource(shader, 1, &ShaderSource, NULL);
-		glCompileShader(shader);
-	};
-	~Shader() = default; 
-
-	unsigned int getID() { return shader; };
-
-	void errorCheck()
+	Shaders(const char* vertexPath, const char* fragmentPath)
 	{
-		/// Check if there are any rendering issues during early development
-		int  success;
-		char infoLog[512];
-		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+		// Code adapted from LearnOpenGL (2026) https://learnopengl.com/Getting-started/Shaders
 
-		if (!success)
+		// Retrieve the GLSL code 
+		std::string vertexCode;
+		std::string fragmentCode;
+		std::ifstream vShaderFile;
+		std::ifstream fShaderFile;
+
+		// For if reading shaders fails
+		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+		// Try and load the vertex/fragment shaders from path
+		try
 		{
-			glGetShaderInfoLog(shader, 512, NULL, infoLog);
-			std::string errormsg = "ERROR::SHADER::COMPILATION_FAILED\n";
-			errormsg += infoLog;
-			throw std::runtime_error(errormsg);
+			vShaderFile.open(vertexPath);
+			fShaderFile.open(fragmentPath);
+
+			std::stringstream vShaderStream, fShaderStream;
+			vShaderStream << vShaderFile.rdbuf();
+			fShaderStream << fShaderFile.rdbuf();
+
+			vShaderFile.close();
+			fShaderFile.close();
+
+
+			vertexCode = vShaderStream.str();
+			fragmentCode = fShaderStream.str();
 		}
+		catch (std::ifstream::failure e)
+		{
+			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+		}
+
+		const char* vShaderCode = vertexCode.c_str();
+		const char* fShaderCode = fragmentCode.c_str();
+
+		unsigned int vertex, fragment;
+
+		// Create Vertex Shader 
+		vertex = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertex, 1, &vShaderCode, NULL);
+		glCompileShader(vertex);
+
+		this->errorCheck("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n");
+
+		// Create Fragment Shader 
+		fragment = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragment, 1, &fShaderCode, NULL);
+		glCompileShader(fragment);
+
+		this->errorCheck("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n");
+		// Link these and create shader program
+		shaderID = glCreateProgram();
+		glAttachShader(shaderID, vertex);
+		glAttachShader(shaderID, fragment);
+		glLinkProgram(shaderID);
+
+		this->errorCheck("ERROR::SHADER::PROGRAM::LINKING::FAILED\n");
+
+		// Delete Redundancies
+		glDeleteShader(vertex);
+		glDeleteShader(fragment);
 	}
+
+	/// Allow for shaderID access should it be manually requested
+	unsigned int getID() { return shaderID; };
+
+	/// brief Use the Shader
+	void use();
+
+	/// \brief Shader's Boolean Uniform Setter
+	void setBool(const std::string& name, bool value) const; // Const is used here so any member variables are immutable and can't be changed
+
+	/// \brief Shader's Int Uniform Setter
+	void setInt(const std::string& name, int value) const;
+
+	/// \brief Shader's Float Uniform Setter (Usualy Colour)
+	void setFloat(const std::string& name, float r, float g, float b, float opacity) const;
+
+	// End of adapted code
+
+
+
+	/// \brief Check for errors during shader compilation process
+	void errorCheck(std::string errorMessage);
+
+	~Shaders() = default;
 private:
-	unsigned int shader;
+	/// \brief Shader's Unique ID
+	unsigned int shaderID;	// Encapsulated to prevent any accidental changes
 };
+
+#endif

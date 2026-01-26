@@ -1,5 +1,8 @@
 #pragma once
 #define GLFW_INCLUDE_NONE
+#define SHADER_PATH "vertex.vs" // vertex shader file path
+#define FRAGMENT_PATH "fragment.fs" // fragment shader file path 
+
 #include "Objects.h"
 #include "WindowSettings.h"
 #include "Drawable.h"
@@ -22,7 +25,7 @@ void countdown(std::atomic<bool>& running);
 /// \brief Do *Blank* every frame
 /// \param window Context Window
 /// \param running Is Program Running?
-void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject);
+void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject, Shaders& shader);
 
 /// \brief Is Program Running?
 extern std::atomic <bool> running;

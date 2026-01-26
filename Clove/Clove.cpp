@@ -1,5 +1,4 @@
 #include "Clove.h"
-#include "Shaders.h"
 
 void countdown(std::atomic<bool>& running) 
 {
@@ -16,11 +15,11 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject)
+void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject, Shaders& shader)
 {
     while (!glfwWindowShouldClose(window) && running)
     {
-        renderer(window, ArrayObject);
+        renderer(window, ArrayObject, shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -83,9 +82,11 @@ int main()
     VAO ArrayObject;
     VBO BufferObject;
     EBO ElementBufferObject;
-    createShaders();
+    // Create our shader program
+    Shaders shader(SHADER_PATH, FRAGMENT_PATH);
+
     objectLinker(ArrayObject, BufferObject, ElementBufferObject);
-    Tick(window, running, ArrayObject);
+    Tick(window, running, ArrayObject, shader);
 
     running = false; // Ensure this flag is 0, in case the above while loop closed from the user closing the window
 

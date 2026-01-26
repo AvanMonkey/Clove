@@ -132,6 +132,7 @@
     <ClCompile Include="InputHandlers.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Shaders.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clove.h" />
@@ -142,6 +143,10 @@
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="WindowSettings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fragment.fs" />
+    <None Include="vertex.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
