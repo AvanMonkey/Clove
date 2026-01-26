@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "Objects.h"
 
 /// Draw Shapes and Objects in the Simulator
 class Drawable {
@@ -27,4 +28,8 @@ protected:
 
 	/// \brief Offset in VBO
 	const void* byteOffset = nullptr;
+
+	VAO ArrayObject;
+	VBO BufferObject;
+	EBO ElementBufferObject;
 };

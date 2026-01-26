@@ -34,3 +34,4 @@ void Shaders::errorCheck(std::string errormsg)
 		throw std::runtime_error(errormsg);
 	}
 }
+// End of adapted code

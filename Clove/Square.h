@@ -1,10 +1,11 @@
 #pragma once
+#pragma once
 #include "Drawable.h"
 
 /// \brief Draw a Rectangle
-class Rectangle : public Drawable {
+class Square : public Drawable {
 public:
-	Rectangle() {
+	Square() {
 		numberOfVertices = 6;
 		vertexLocation = 0;
 		vertexSize = 3;
@@ -27,18 +28,19 @@ public:
 		// Enable Settings
 		glEnableVertexAttribArray(vertexLocation);
 	};
-	~Rectangle() = default;
+	~Square() = default;
 
 	void draw();
 
-private: 
-	float vertices[12] = {
-	-0.2f, -0.9f, 0.0f,  // bottom-left
-	 0.2f, -0.9f, 0.0f,  // bottom-right
-	 0.2f, -0.7f, 0.0f,  // top-right
-	-0.2f, -0.7f, 0.0f   // top-left
+private:
+	float vertices[12] =
+	{
+		0.5f, 0.7f, 0.0f, // Top right
+		0.5f, 0.2f, 0.0f, // Bottom Right
+		0.0f, 0.2f, 0.0f, // Bottom Left
+		0.0f, 0.7f, 0.0f // Top Left
 	};
-	unsigned int indices[6] = 
+	unsigned int indices[6] =
 	{
 		0, 1, 3,
 		1, 2, 3

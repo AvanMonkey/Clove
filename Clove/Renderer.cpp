@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "Rectangle.h"
 
 void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject)
 {
@@ -9,12 +8,14 @@ void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject)
 	glEnableVertexAttribArray(0);
 }
 
-void renderer(GLFWwindow* window, VAO& ArrayObject)
+void renderer(GLFWwindow* window, Rectangle& rect, Square& sqr)
 {
-	Rectangle rect; // Temporary, right now this is being created every frame but it doesnt matter right now
 	glClear(GL_COLOR_BUFFER_BIT);
-
-	ArrayObject.bindArray();
-
 	rect.draw();
+
+	// We cant make this false afterwards otherwise it would instantly be cleared next frame by glClear
+	if (drawSquare)
+	{
+		sqr.draw();
+	}
 }

@@ -9,6 +9,8 @@
 #include "Renderer.h"
 #include "Shaders.h"
 #include "InputHandlers.h"
+#include "Rectangle.h"
+#include "Square.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -25,7 +27,7 @@ void countdown(std::atomic<bool>& running);
 /// \brief Do *Blank* every frame
 /// \param window Context Window
 /// \param running Is Program Running?
-void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject);
+void Tick(GLFWwindow* window, std::atomic<bool>& running);
 
 /// \brief Is Program Running?
 extern std::atomic <bool> running;

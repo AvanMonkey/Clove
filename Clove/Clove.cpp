@@ -17,11 +17,13 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void Tick(GLFWwindow* window, std::atomic<bool>& running, VAO& ArrayObject)
+void Tick(GLFWwindow* window, std::atomic<bool>& running)
 {
+    Rectangle rect;
+    Square sqr;
     while (!glfwWindowShouldClose(window) && running)
     {
-        renderer(window, ArrayObject);
+        renderer(window, rect, sqr);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -66,6 +68,8 @@ int main()
         throw e;
     }
 
+
+
     // Setup Window Settings
     glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
     glfwSetFramebufferSizeCallback(window, resizeFrameBuffer);
@@ -82,14 +86,15 @@ int main()
     // Temp
     std::thread t1(countdown, std::ref(running));
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Shapes will originally be Outlines
-    // Our Objects that store data about vertices, indices and their settings in the GPU
-    VAO ArrayObject;
-    VBO BufferObject;
-    EBO ElementBufferObject;
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Shapes will be Outlines
 
-    objectLinker(ArrayObject, BufferObject, ElementBufferObject);
-    Tick(window, running, ArrayObject);
+    // Our Objects that store data about vertices, indices and their settings in the GPU
+    /*VAO ArrayObject;
+    VBO BufferObject;
+    EBO ElementBufferObject;*/
+
+    //objectLinker(ArrayObject, BufferObject, ElementBufferObject);
+    Tick(window, running);
 
     delete shader; // Program has ended, free the memory
 

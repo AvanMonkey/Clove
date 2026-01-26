@@ -1,7 +1,8 @@
-#include "Rectangle.h"
+#include "Square.h"
 #include <glad/glad.h>
 
-void Rectangle::draw() {
+void Square::draw() {
+
 	ArrayObject.bindArray();
 
 	// Draw

@@ -10,6 +10,8 @@ public:
 	void bindBuffer(GLenum type) {
 		glBindBuffer(type, id); 
 	};
+
+	unsigned int getID() { return id; };
 protected:
 	unsigned int id = 0;
 };
@@ -31,7 +33,7 @@ public:
 };
 
 ///  \brief Vertex Array Object - Stores the setup settings for objects in GPU Memory (Vertex Positions, Colours, Etc.)
-class VAO : Objects
+class VAO : public Objects
 {
 public:
 	VAO() { glGenVertexArrays(1, &id); };

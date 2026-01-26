@@ -133,6 +133,7 @@
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shaders.cpp" />
+    <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clove.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="WindowSettings.h" />
   </ItemGroup>
   <ItemGroup>

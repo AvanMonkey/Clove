@@ -11,3 +11,6 @@ void processMouseInput(GLFWwindow* window, int button, int action, int mods);
 
 // \brief Theme of app (Light/Dark Mode)
 extern bool lightMode;
+
+// Trigger a square to be drawn
+extern bool drawSquare;
