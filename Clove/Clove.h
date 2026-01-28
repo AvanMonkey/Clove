@@ -32,3 +32,5 @@ void Tick(GLFWwindow* window, std::atomic<bool>& running);
 
 /// \brief Is Program Running?
 extern std::atomic <bool> running;
+
+extern float deltaTime;

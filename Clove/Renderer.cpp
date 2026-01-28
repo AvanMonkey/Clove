@@ -1,13 +1,13 @@
 #include "Renderer.h"
 
-void calculateVelocity(Square* square)
+void calculateVelocity(Square* square, float deltaTime)
 {
-	float newVelocity = square->getVelocity() + 0.0001;
+	float newVelocity = square->getVelocity() - SPEED * deltaTime;
 	square->setVelocity(newVelocity);
 	square->updateLocation();
 }
 
-void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr)
+void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float deltaTime)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	rect.draw();
@@ -17,7 +17,7 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr)
 	{
 		for (auto square : ptr->squaresCreated)
 		{
-			calculateVelocity(square);
+			calculateVelocity(square, deltaTime);
 			square->draw();
 
 			// Delete oldest object once we go over threshold

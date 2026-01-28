@@ -17,13 +17,18 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
 
 void Tick(GLFWwindow* window, std::atomic<bool>& running)
 {
+    float lastTick = clock();
+    float deltaTime = 0;
     Rectangle rect;
     InputPointers* ptr = new InputPointers(float(xpos), float(ypos));
     glfwSetWindowUserPointer(window, ptr);
 
     while (!glfwWindowShouldClose(window) && running)
     {
-        renderer(window, rect, ptr);
+        deltaTime = lastTick - clock();
+        lastTick = clock();
+
+        renderer(window, rect, ptr, deltaTime);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
