@@ -18,7 +18,7 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
 void Tick(GLFWwindow* window, std::atomic<bool>& running)
 {
     Rectangle rect;
-    Pointers* ptr = new Pointers(float(xpos), float(ypos));
+    InputPointers* ptr = new InputPointers(float(xpos), float(ypos));
     glfwSetWindowUserPointer(window, ptr);
 
     while (!glfwWindowShouldClose(window) && running)

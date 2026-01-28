@@ -21,7 +21,7 @@ void transformCoordinates(GLFWwindow* window)
 void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	// Grab Shader Pointer to update look
-	Pointers* ptr = static_cast<Pointers*>(glfwGetWindowUserPointer(window));
+	InputPointers* ptr = static_cast<InputPointers*>(glfwGetWindowUserPointer(window));
 
 	// Exit window
 	if (key == GLFW_KEY_F4 && action == GLFW_PRESS)
@@ -52,7 +52,7 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 void processMouseInput(GLFWwindow* window, int button, int action, int mods)
 {
 	// Grab Pointer to our struct holding our pointers
-	Pointers* ptr = static_cast<Pointers*>(glfwGetWindowUserPointer(window));
+	InputPointers* ptr = static_cast<InputPointers*>(glfwGetWindowUserPointer(window));
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{

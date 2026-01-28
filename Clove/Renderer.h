@@ -5,4 +5,4 @@
 #include "Square.h"
 #include "Pointers.h"
 /// \brief The Main Method That Renders Visuals
-void renderer(GLFWwindow* window, Rectangle& rect, Pointers* ptr);
+void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr);

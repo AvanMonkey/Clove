@@ -8,7 +8,7 @@ void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject)
 	glEnableVertexAttribArray(0);
 }
 
-void renderer(GLFWwindow* window, Rectangle& rect, Pointers* ptr)
+void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	rect.draw();
