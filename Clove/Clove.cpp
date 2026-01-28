@@ -1,10 +1,10 @@
 #include "Clove.h"
 
-Shaders* shader; // We can't pass this into keyboard process inputs, so we will make a pointer and use that instead
+//Shaders* shader; // We can't pass this into keyboard process inputs, so we will make a pointer and use that instead
 
 void countdown(std::atomic<bool>& running) 
 {
-    for (int timer = 1; timer < 16 && running; timer++)
+    for (int timer = 1; timer < 90 && running; timer++)
     {
         std::cout << timer << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -20,17 +20,25 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
 void Tick(GLFWwindow* window, std::atomic<bool>& running)
 {
     Rectangle rect;
+    Pointers* ptr = new Pointers(float(xpos), float(ypos));
+    glfwSetWindowUserPointer(window, ptr);
+
     while (!glfwWindowShouldClose(window) && running)
     {
-        renderer(window, rect);
+        renderer(window, rect, ptr);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    // Free memory now that our pointers aren't used anymore (Since the simulators been closed)
+    ptr->deletePointers();
+    delete ptr;
 }
 
 int main()
 {
+    // Code adapted from LearnOpenGL (2026)
+  
     // GLFW Window Initiation
     if (!glfwInit())
     {
@@ -48,8 +56,6 @@ int main()
     }
     glfwMakeContextCurrent(window);
 
-
-
     // GLAD Initiation (Manages Function Pointers)
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) // 'glfwGetProcAddress' Allows for Portability across different OS
     {
@@ -66,15 +72,11 @@ int main()
     {
         throw e;
     }
-
-
-
     // Setup Window Settings
     glViewport(Settings.lowerLeftCornerX, Settings.lowerLeftCornerY, Settings.width, Settings.height);
     glfwSetFramebufferSizeCallback(window, resizeFrameBuffer);
 
-    // Create our shader program
-    shader = new Shaders(SHADER_PATH, FRAGMENT_PATH);
+    // End of adapted code
 
     // Setup Mouse and Keyboard Inputs
     glfwSetMouseButtonCallback(window, processMouseInput);
@@ -87,15 +89,7 @@ int main()
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); // Shapes will be Outlines
 
-    // Our Objects that store data about vertices, indices and their settings in the GPU
-    /*VAO ArrayObject;
-    VBO BufferObject;
-    EBO ElementBufferObject;*/
-
-    //objectLinker(ArrayObject, BufferObject, ElementBufferObject);
     Tick(window, running);
-
-    delete shader; // Program has ended, free the memory
 
     running = false; // Ensure this flag is 0, in case the above while loop closed from the user closing the window
 

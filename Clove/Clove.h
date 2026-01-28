@@ -11,6 +11,7 @@
 #include "InputHandlers.h"
 #include "Rectangle.h"
 #include "Square.h"
+#include "Pointers.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -33,4 +34,4 @@ void Tick(GLFWwindow* window, std::atomic<bool>& running);
 extern std::atomic <bool> running;
 
 // \brief Points to shader object stored on the heap for global access
-extern Shaders* shader;
+//extern Shaders* shader;

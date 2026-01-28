@@ -40,6 +40,8 @@ public:
 
 	void draw();
 
+	void updateLocation(float xpos, float ypos);
+
 private:
 	float vertices[12];
 

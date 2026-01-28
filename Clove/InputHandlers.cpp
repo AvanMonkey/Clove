@@ -20,6 +20,8 @@ void transformCoordinates(GLFWwindow* window)
 // Code adapted from GLFW (2026) https://www.glfw.org/docs/3.3/input_guide.html 
 void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+	// Grab Shader Pointer to update look
+	Pointers* ptr = static_cast<Pointers*>(glfwGetWindowUserPointer(window));
 
 	// Exit window
 	if (key == GLFW_KEY_F4 && action == GLFW_PRESS)
@@ -31,16 +33,16 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 	{
 // End of adapted code
-		shader->use();
+		ptr->shader->use();
 		if (lightMode)
 		{
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-			shader->setFloat("ourColour", 1.0f, 1.0f, 1.0f, 1.0f);
+			ptr->shader->setFloat("ourColour", 1.0f, 1.0f, 1.0f, 1.0f);
 		}
 		else
 		{
 			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-			shader->setFloat("ourColour", 0.0f, 0.0f, 0.0f, 1.0f);
+			ptr->shader->setFloat("ourColour", 0.0f, 0.0f, 0.0f, 1.0f);
 		}
 		lightMode = !lightMode;
 	}
@@ -49,6 +51,9 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 // Code adapted from GLFW (2026) https://www.glfw.org/docs/3.3/input_guide.html 
 void processMouseInput(GLFWwindow* window, int button, int action, int mods)
 {
+	// Grab Pointer to our struct holding our pointers
+	Pointers* ptr = static_cast<Pointers*>(glfwGetWindowUserPointer(window));
+
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
 		glfwGetCursorPos(window, &xpos, &ypos);
@@ -59,6 +64,7 @@ void processMouseInput(GLFWwindow* window, int button, int action, int mods)
 		transformCoordinates(window);
 		std::cout << "X New Position: " << xpos << std::endl;
 		std::cout << "Y New Position: " << ypos << std::endl;
+		ptr->sqr->updateLocation(xpos, ypos);
 	}
 
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)

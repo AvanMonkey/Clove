@@ -139,6 +139,7 @@
     <ClInclude Include="Clove.h" />
     <ClInclude Include="InputHandlers.h" />
     <ClInclude Include="Objects.h" />
+    <ClInclude Include="Pointers.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shaders.h" />
