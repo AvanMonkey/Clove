@@ -14,3 +14,6 @@ extern bool lightMode;
 
 // Trigger a square to be drawn
 extern bool drawSquare;
+
+/// \brief X and Y positions of where user clicked. Use to determine square object spawn position
+extern double xpos, ypos;

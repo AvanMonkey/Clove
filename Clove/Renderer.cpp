@@ -8,7 +8,7 @@ void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject)
 	glEnableVertexAttribArray(0);
 }
 
-void renderer(GLFWwindow* window, Rectangle& rect, Square& sqr)
+void renderer(GLFWwindow* window, Rectangle& rect)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	rect.draw();
@@ -16,6 +16,7 @@ void renderer(GLFWwindow* window, Rectangle& rect, Square& sqr)
 	// We cant make this false afterwards otherwise it would instantly be cleared next frame by glClear
 	if (drawSquare)
 	{
+		Square sqr = Square(float(xpos), float(ypos));
 		sqr.draw();
 	}
 }

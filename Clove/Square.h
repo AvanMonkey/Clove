@@ -1,15 +1,23 @@
 #pragma once
-#pragma once
 #include "Drawable.h"
 
 /// \brief Draw a Rectangle
 class Square : public Drawable {
 public:
-	Square() {
+	Square(float xpos, float ypos) {
 		numberOfVertices = 6;
 		vertexLocation = 0;
 		vertexSize = 3;
 		stride = 3;
+
+		// Add the vertices offset to the coordinates of where the user clicked so we can spawn a sqaure wherever the user clicked
+		float vertices[12] =
+		{
+			0.025f + xpos, 0.025f - ypos, 0.0f, // Top right
+			0.025f + xpos, -0.025f - ypos, 0.0f, // Bottom Right
+			-0.025f + xpos, -0.025f - ypos, 0.0f, // Bottom Left
+			-0.025f + xpos, 0.025f - ypos, 0.0f // Top Left
+		};
 
 		ArrayObject.bindArray();
 		BufferObject.bindBuffer(GL_ARRAY_BUFFER);
@@ -33,13 +41,8 @@ public:
 	void draw();
 
 private:
-	float vertices[12] =
-	{
-		0.5f, 0.7f, 0.0f, // Top right
-		0.5f, 0.2f, 0.0f, // Bottom Right
-		0.0f, 0.2f, 0.0f, // Bottom Left
-		0.0f, 0.7f, 0.0f // Top Left
-	};
+	float vertices[12];
+
 	unsigned int indices[6] =
 	{
 		0, 1, 3,

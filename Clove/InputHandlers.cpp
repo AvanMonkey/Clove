@@ -2,6 +2,20 @@
 
 bool lightMode = false; // Start in dark mode
 bool drawSquare = false;
+double xpos, ypos;
+
+// Resize xpos and ypos to be in sync with the user's cursor in the window
+void transformCoordinates(GLFWwindow* window)
+{
+	// We change the coordinates to NDC, so the xpos and ypos are in sync with screen pixels
+	int width, height;
+	glfwGetWindowSize(window, &width, &height);
+
+	// Code adapted from manon_graphics_witch (2019) https://www.reddit.com/r/GraphicsProgramming/comments/icyhqp/how_can_i_go_from_screen_coordinates_to_ndc/
+	xpos = xpos / width * 2 - 1;
+	ypos = ypos / height * 2 - 1;
+	// End of adapted code
+}
 
 // Code adapted from GLFW (2026) https://www.glfw.org/docs/3.3/input_guide.html 
 void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -37,8 +51,14 @@ void processMouseInput(GLFWwindow* window, int button, int action, int mods)
 {
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
 	{
-		std::cout << "Clicked Left" << std::endl;
+		glfwGetCursorPos(window, &xpos, &ypos);
+
+		std::cout << "X Position: " << xpos << std::endl;
+		std::cout << "Y Position: " << ypos << std::endl;
 		drawSquare = true; 
+		transformCoordinates(window);
+		std::cout << "X New Position: " << xpos << std::endl;
+		std::cout << "Y New Position: " << ypos << std::endl;
 	}
 
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)

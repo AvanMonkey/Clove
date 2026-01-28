@@ -26,6 +26,14 @@ public:
 
 		// Enable Settings
 		glEnableVertexAttribArray(vertexLocation);
+
+		float vertices[12] = {
+		-0.2f, -0.9f, 0.0f,  // bottom-left
+		 0.2f, -0.9f, 0.0f,  // bottom-right
+		 0.2f, -0.7f, 0.0f,  // top-right
+		-0.2f, -0.7f, 0.0f   // top-left
+		};
+
 	};
 	~Rectangle() = default;
 
@@ -38,6 +46,7 @@ private:
 	 0.2f, -0.7f, 0.0f,  // top-right
 	-0.2f, -0.7f, 0.0f   // top-left
 	};
+
 	unsigned int indices[6] = 
 	{
 		0, 1, 3,

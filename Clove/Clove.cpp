@@ -20,10 +20,9 @@ void resizeFrameBuffer(GLFWwindow* window, int width, int height)
 void Tick(GLFWwindow* window, std::atomic<bool>& running)
 {
     Rectangle rect;
-    Square sqr;
     while (!glfwWindowShouldClose(window) && running)
     {
-        renderer(window, rect, sqr);
+        renderer(window, rect);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
