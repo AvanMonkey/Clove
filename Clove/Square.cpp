@@ -1,5 +1,6 @@
 #include "Square.h"
 #include <glad/glad.h>
+#include <iostream>
 
 void Square::draw() {
 
@@ -9,16 +10,20 @@ void Square::draw() {
 	glDrawElements(GL_TRIANGLES, numberOfVertices, GL_UNSIGNED_INT, byteOffset);
 }
 
-void Square::updateLocation(float xpos, float ypos)
+void Square::updateLocation()
 {
-	// Add the vertices offset to the coordinates of where the user clicked so we can spawn a sqaure wherever the user clicked
-	float vertices[12] =
+	std::vector<float> objectVertices = vertices;
+
+	/*for (int i = 0; i < (sizeof(vertices) / sizeof(vertices[0])); i += 3)
 	{
-		0.025f + xpos, 0.025f - ypos, 0.0f, // Top right
-		0.025f + xpos, -0.025f - ypos, 0.0f, // Bottom Right
-		-0.025f + xpos, -0.025f - ypos, 0.0f, // Bottom Left
-		-0.025f + xpos, 0.025f - ypos, 0.0f // Top Left
-	};
+		vertices[i] += velocity;
+	}*/
+
+	// Apply gravity to squares
+	for (int i = 1; i <= 12; i += 3)
+	{
+		objectVertices[i] -= velocity;
+	}
 
 	// Code adapted from LearnOpenGL (2026)
 	ArrayObject.bindArray();
@@ -27,7 +32,7 @@ void Square::updateLocation(float xpos, float ypos)
 	glEnableVertexAttribArray(0);
 
 	// Load Vertices into GPU
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, objectVertices.size() * sizeof(objectVertices[0]), objectVertices.data(), GL_STATIC_DRAW);
 
 	// Settings of what the shape being drawn will look like, it's position, etc.
 	glVertexAttribPointer(vertexLocation, vertexSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), byteOffset);

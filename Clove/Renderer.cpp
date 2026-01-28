@@ -1,11 +1,10 @@
 #include "Renderer.h"
 
-void objectLinker(VAO& ArrayObject, VBO& BufferObject, EBO& ElementBufferObject)
+void calculateVelocity(Square* square)
 {
-	ArrayObject.bindArray();
-	BufferObject.bindBuffer(GL_ARRAY_BUFFER);
-	ElementBufferObject.bindBuffer(GL_ELEMENT_ARRAY_BUFFER);
-	glEnableVertexAttribArray(0);
+	float newVelocity = square->getVelocity() + 0.0001;
+	square->setVelocity(newVelocity);
+	square->updateLocation();
 }
 
 void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr)
@@ -18,7 +17,16 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr)
 	{
 		for (auto square : ptr->squaresCreated)
 		{
+			calculateVelocity(square);
 			square->draw();
+
+			// Delete oldest object once we go over threshold
+			if (ptr->squaresCreated.size() > MAX_AMOUNT_OF_OBJECTS)
+			{
+				Square* oldestSquare = ptr->squaresCreated[0];
+				delete oldestSquare;
+				ptr->squaresCreated.erase(ptr->squaresCreated.begin());
+			}
 		}
 	}
 	else if (!ptr->squaresCreated.empty() && !drawSquare)
