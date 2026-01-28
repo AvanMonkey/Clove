@@ -20,6 +20,7 @@ void Square::updateLocation(float xpos, float ypos)
 		-0.025f + xpos, 0.025f - ypos, 0.0f // Top Left
 	};
 
+	// Code adapted from LearnOpenGL (2026)
 	ArrayObject.bindArray();
 	BufferObject.bindBuffer(GL_ARRAY_BUFFER);
 	ElementBufferObject.bindBuffer(GL_ELEMENT_ARRAY_BUFFER);
@@ -36,4 +37,5 @@ void Square::updateLocation(float xpos, float ypos)
 
 	// Enable Settings
 	glEnableVertexAttribArray(vertexLocation);
+	// End of adapted code
 }

@@ -32,6 +32,3 @@ void Tick(GLFWwindow* window, std::atomic<bool>& running);
 
 /// \brief Is Program Running?
 extern std::atomic <bool> running;
-
-// \brief Points to shader object stored on the heap for global access
-//extern Shaders* shader;

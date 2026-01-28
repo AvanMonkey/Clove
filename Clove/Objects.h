@@ -7,11 +7,10 @@ class Objects
 public:
 	virtual ~Objects() = default; // Allows child classes to destroy both the Objects class and themselves
 
-	void bindBuffer(GLenum type) {
-		glBindBuffer(type, id); 
-	};
+	void bindBuffer(GLenum type) { glBindBuffer(type, id); };
 
 	unsigned int getID() { return id; };
+
 protected:
 	unsigned int id = 0;
 };

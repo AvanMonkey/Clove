@@ -1,7 +1,5 @@
 #include "Clove.h"
 
-//Shaders* shader; // We can't pass this into keyboard process inputs, so we will make a pointer and use that instead
-
 void countdown(std::atomic<bool>& running) 
 {
     for (int timer = 1; timer < 90 && running; timer++)

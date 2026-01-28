@@ -13,12 +13,13 @@ public:
 		// Add the vertices offset to the coordinates of where the user clicked so we can spawn a sqaure wherever the user clicked
 		float vertices[12] =
 		{
-			0.025f + xpos, 0.025f - ypos, 0.0f, // Top right
-			0.025f + xpos, -0.025f - ypos, 0.0f, // Bottom Right
-			-0.025f + xpos, -0.025f - ypos, 0.0f, // Bottom Left
-			-0.025f + xpos, 0.025f - ypos, 0.0f // Top Left
+			0.015f + xpos, 0.025f - ypos, 0.0f, // Top right
+			0.015f + xpos, -0.025f - ypos, 0.0f, // Bottom Right
+			-0.015f + xpos, -0.025f - ypos, 0.0f, // Bottom Left
+			-0.015f + xpos, 0.025f - ypos, 0.0f // Top Left
 		};
 
+		// Code adapted from LearnOpenGL (2026)
 		ArrayObject.bindArray();
 		BufferObject.bindBuffer(GL_ARRAY_BUFFER);
 		ElementBufferObject.bindBuffer(GL_ELEMENT_ARRAY_BUFFER);
@@ -35,7 +36,11 @@ public:
 
 		// Enable Settings
 		glEnableVertexAttribArray(vertexLocation);
+		// End of adapted code
 	};
+
+	float getVertices() { return vertices[0]; };
+
 	~Square() = default;
 
 	void draw();

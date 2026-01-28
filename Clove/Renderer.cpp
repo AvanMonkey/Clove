@@ -16,6 +16,17 @@ void renderer(GLFWwindow* window, Rectangle& rect, Pointers* ptr)
 	// We cant make this false afterwards otherwise it would instantly be cleared next frame by glClear
 	if (drawSquare)
 	{
-		ptr->sqr->draw();
+		for (auto square : ptr->squaresCreated)
+		{
+			square->draw();
+		}
+	}
+	else if (!ptr->squaresCreated.empty() && !drawSquare)
+	{
+		for (auto square : ptr->squaresCreated)
+		{
+			delete square; // Delete pointer objects and clear the array of null values so the screen is genuienly reset with no dangling pointers or memory leaks
+			ptr->squaresCreated.clear();
+		}
 	}
 }

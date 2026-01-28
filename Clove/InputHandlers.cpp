@@ -64,7 +64,10 @@ void processMouseInput(GLFWwindow* window, int button, int action, int mods)
 		transformCoordinates(window);
 		std::cout << "X New Position: " << xpos << std::endl;
 		std::cout << "Y New Position: " << ypos << std::endl;
-		ptr->sqr->updateLocation(xpos, ypos);
+		
+		Square* sqr = new Square(xpos, ypos);
+
+		ptr->squaresCreated.push_back(sqr);
 	}
 
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)
