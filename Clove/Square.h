@@ -1,7 +1,7 @@
 #pragma once
 #include "Drawable.h";
 #include <iostream>
-#define SPEED  0.0008
+#define GRAVITY  0.00002
 
 /// \brief Draw a Rectangle
 class Square : public Drawable {
@@ -51,4 +51,7 @@ private:
 
 	/// \brief Object's Velocity
 	float velocity = 0;
+
+	/// Stores new Y position of square after velocity is applied
+	float positionY = 0.0f;
 };

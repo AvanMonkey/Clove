@@ -13,6 +13,7 @@ void Square::draw() {
 void Square::updateLocation()
 {
 	std::vector<float> objectVertices = vertices;
+	positionY += velocity;
 
 	/*for (int i = 0; i < (sizeof(vertices) / sizeof(vertices[0])); i += 3)
 	{
@@ -22,7 +23,7 @@ void Square::updateLocation()
 	// Apply gravity to squares through changing the y axis of each vertices by velocity
 	for (int i = 1; i < vertices.size(); i += 3)
 	{
-		objectVertices[i] -= velocity;
+		objectVertices[i] -= positionY;
 	}
 
 	// Code adapted from LearnOpenGL (2026)

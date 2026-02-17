@@ -2,7 +2,7 @@
 
 void calculateVelocity(Square* square, float deltaTime)
 {
-	float newVelocity = square->getVelocity() - SPEED * deltaTime;
+	float newVelocity = square->getVelocity() - GRAVITY * deltaTime;
 	square->setVelocity(newVelocity);
 	square->updateLocation();
 }
