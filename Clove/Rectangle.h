@@ -39,7 +39,6 @@ public:
 
 	void draw();
 
-private: 
 	float vertices[12] = {
 	-0.2f, -0.9f, 0.0f,  // bottom-left
 	 0.2f, -0.9f, 0.0f,  // bottom-right
@@ -47,6 +46,7 @@ private:
 	-0.2f, -0.7f, 0.0f   // top-left
 	};
 
+private: 
 	unsigned int indices[6] = 
 	{
 		0, 1, 3,

@@ -6,6 +6,8 @@
 #include "Pointers.h"
 #define MAX_AMOUNT_OF_OBJECTS 10
 
+bool isColliding(Rectangle& rect, Square* sqr);
+
 // \brief calculates the velocity of an object through deltaTime. Currently only used for gravity
 void calculateVelocity(Square* square, float deltaTime);
 
