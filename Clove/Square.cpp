@@ -10,33 +10,25 @@ void Square::draw() {
 	glDrawElements(GL_TRIANGLES, numberOfVertices, GL_UNSIGNED_INT, byteOffset);
 }
 
-void Square::updateLocation(float deltaTime)
+void Square::updateLocation()
 {
-	if (numberOfTimesBounced < 12)
+	// Falling
+	if (fallingFlag)
 	{
-		// Falling
-		if (!stopFlag)
-		{
-			positionY += velocity;
-		}
-		// Bouncing
-		else
-		{
-			positionY *= decay;
-
-			printf("%f\n", positionY);
-
-			stopFlag = false;   // switch to falling
-			numberOfTimesBounced += 1;
-		}
-
-		// Apply gravity to squares through changing the y axis of each vertices by velocity
-		for (int i = 1; i < vertices.size(); i += 3)
-		{
-			vertices[i] -= positionY;
-		}
+		positionY += velocity;
+	}
+	// Bouncing (as objects will bounce when they hit a surface like in real life)
+	else
+	{
+		positionY *= decay;
+		numberOfTimesBounced += 1; // This is so after the ball bounces 12 times, it comes to a stop, otherwise it would just vibrate (I genuienly can't work out a way to make this smooth so i'm doing it like this)
 	}
 
+	// Apply gravity to squares through changing the y axis of each vertices by velocity
+	for (int i = 1; i < vertices.size(); i += 3)
+	{
+		vertices[i] -= positionY;
+	}
 
 	// Code adapted from LearnOpenGL (2026)
 	ArrayObject.bindArray();

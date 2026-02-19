@@ -2,9 +2,13 @@
 
 void calculateVelocity(Square* square, float deltaTime)
 {
-	float newVelocity = square->getVelocity() - GRAVITY * deltaTime;
+	float gravityScaled = GRAVITY * 0.00001; // Scaled gravity for calculating velocity (Without scaling the gravity is too strong to be seen on screen)
+
+	square->setForce(GRAVITY * deltaTime * square->getMass()); // Force = Mass * Gravity
+
+	float newVelocity = square->getVelocity() - (gravityScaled * deltaTime * square->getMass());
 	square->setVelocity(newVelocity);
-	square->updateLocation(deltaTime);
+	square->updateLocation();
 }
 
 bool isColliding(Rectangle& rect, Square* sqr)
@@ -30,6 +34,7 @@ bool isColliding(Rectangle& rect, Square* sqr)
 
 	// End of adapted code
 }
+
 void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float deltaTime)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -40,18 +45,32 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 	{
 		for (auto square : ptr->squaresCreated)
 		{
-			bool collided = isColliding(rect, square);
-
 			calculateVelocity(square, deltaTime);
 			square->draw();
 
+			bool collided = isColliding(rect, square);
+			square->fallingFlag = !collided; // Square will always fall unless a collision happens
+
+			// If square hits rectangle
 			if (collided)
 			{
-				printf("Collision \n");
-				square->stopVelocity(); // stop falling
+				rect.updatePosition(square);
+				
+				// Add bounce if bounce is not over 10, in which case ground the object
+				if (square->numberOfTimesBounced >= 10)
+				{
+					square->velocity = 0.0f;
+					square->fallingFlag = false;
+				}
+				else
+				{
+					square->addBounce();
+				}
 
 				// Snap Boxes on top of rectangle
 				float overlap = square->vertices[4] - rect.vertices[7];
+
+				// This is technically O(n^2) but its 4 iterations so it really doesn't matter
 				for (int i = 1; i < square->vertices.size(); i += 3) {
 					square->vertices[i] -= overlap; // correct y-axis
 				}

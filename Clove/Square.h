@@ -2,7 +2,7 @@
 #include "Drawable.h";
 #include <iostream>
 #include <random>
-#define GRAVITY  0.0000003
+#define GRAVITY  0.09
 
 /// \brief Draw a Rectangle
 class Square : public Drawable {
@@ -33,6 +33,8 @@ public:
 
 		// Generate a random number
 		decay = distr(gen); // Decay from bounce so the box gradually comes to a standstill
+
+		numberOfTimesBounced = 0;
 	};
 
 	~Square() = default;
@@ -41,7 +43,7 @@ public:
 	void draw();
 
 	/// \brief Update square's location based on factor's such as gravity
-	void updateLocation(float deltaTime);
+	void updateLocation();
 
 	/// \brief Return the object's current velocity
 	float getVelocity() { return velocity; };
@@ -49,21 +51,36 @@ public:
 	/// \brief Update the object's Velocity
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
 
-	/// \brief Completley stop an object
-	void stopVelocity() {
-		stopFlag = true;
-		positionY = -positionY;
-	};
+	/// \brief Return object's weight
+	float getMass() { return mass; };
+
+	/// \brief Set object's force
+	void setForce(float newForce) { force = newForce; };
+
+	/// \brief Return object's force
+	float getForce() { return force; };
+
+	/// \brief Set flag to apply object's mass or not to rectangle
+	void setApplyForce() { applyForce = !applyForce; };
+
+	/// \brief Get Flag stating whether or not to apply mass to rectangle
+	bool getApplyForce() { return applyForce; };
+
+	/// \brief Add bounce to object through inverting position
+	void addBounce() { positionY = -positionY; };
 
 	/// \brief Store the vertices of the Square
 	std::vector<float> vertices;
-private:
 
-	/// Stop's falling and triggers bounce
-	bool stopFlag = false;
+	/// States whether or not square is falling
+	bool fallingFlag = false;
 
 	/// \brief If the square is grounded
-	int numberOfTimesBounced = 0;
+	int numberOfTimesBounced;
+
+	/// \brief Object's Velocity
+	float velocity = 0;
+private:
 
 	float decay;
 
@@ -74,9 +91,15 @@ private:
 		1, 2, 3
 	};
 
-	/// \brief Object's Velocity
-	float velocity = 0;
-
-	/// Stores new Y position of square after velocity is applied
+	/// \brief Stores new Y position of square after velocity is applied
 	float positionY = 0.0f;
+
+	/// \brief Each Square has a mass given to it. This weight is used to work out it's falling velocity.
+	float mass = 1.4f;
+
+	/// \brief The force a square exerts
+	float force = 0.0f;
+
+	/// \brief Flag to show whether or not a square can apply force (Will be false after collision to prevent force being applied multiple times)
+	bool applyForce = true;
 };

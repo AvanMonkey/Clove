@@ -1,5 +1,6 @@
 #pragma once
 #include "Drawable.h"
+#include "Square.h"
 
 /// \brief Draw a Rectangle
 class Rectangle : public Drawable {
@@ -10,13 +11,23 @@ public:
 		vertexSize = 3;
 		stride = 3;
 
+		vertices =
+		{
+		-0.2f, 0.5f, 0.0f,  // bottom-left
+		 0.2f, 0.5f, 0.0f,  // bottom-right
+		 0.2f, 0.7f, 0.0f,  // top-right
+		-0.2f, 0.7f, 0.0f   // top-left
+		};
+
+		originalTopLeftYCoordinate = vertices[10];
+
 		ArrayObject.bindArray();
 		BufferObject.bindBuffer(GL_ARRAY_BUFFER);
 		ElementBufferObject.bindBuffer(GL_ELEMENT_ARRAY_BUFFER);
 		glEnableVertexAttribArray(0);
 
 		// Load Vertices into GPU
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
 		// Settings of what the shape being drawn will look like, it's position, etc.
 		glVertexAttribPointer(vertexLocation, vertexSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), byteOffset);
@@ -27,29 +38,35 @@ public:
 		// Enable Settings
 		glEnableVertexAttribArray(vertexLocation);
 
-		float vertices[12] = {
-		-0.2f, -0.9f, 0.0f,  // bottom-left
-		 0.2f, -0.9f, 0.0f,  // bottom-right
-		 0.2f, -0.7f, 0.0f,  // top-right
-		-0.2f, -0.7f, 0.0f   // top-left
-		};
-
 	};
 	~Rectangle() = default;
 
 	void draw();
 
-	float vertices[12] = {
-	-0.2f, -0.9f, 0.0f,  // bottom-left
-	 0.2f, -0.9f, 0.0f,  // bottom-right
-	 0.2f, -0.7f, 0.0f,  // top-right
-	-0.2f, -0.7f, 0.0f   // top-left
-	};
+	void updatePosition(Square* square);
 
-private: 
-	unsigned int indices[6] = 
+	/// update displacement
+	void setDisplacement(float newX) { x = newX; };
+
+	/// \brief Work out the force being applied to the object
+	float getSprintConstant() { return k;  };
+
+	/// \brief Store the vertices of the Rectangle
+	std::vector<float> vertices;
+
+	/// \brief Store original Top Left Coordinate's Y axis to work out displacement
+	float originalTopLeftYCoordinate;
+
+private:
+	unsigned int indices[6] =
 	{
 		0, 1, 3,
 		1, 2, 3
 	};
+
+	/// \brief How stiff the rectangle is
+	float k = 50.0f;
+
+	/// \brief Displacement in length from extension
+	float x = 0.0f;
 };
