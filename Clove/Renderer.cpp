@@ -2,22 +2,21 @@
 
 void calculateVelocity(Square* square, float deltaTime)
 {
-	float gravityScaled = GRAVITY * 0.00001; // Scaled gravity for calculating velocity (Without scaling the gravity is too strong to be seen on screen)
-
 	square->setForce(GRAVITY * deltaTime * square->getMass()); // Force = Mass * Gravity
 
-	float newVelocity = square->getVelocity() - (gravityScaled * deltaTime * square->getMass());
+	float forceScaled = square->getForce() * 0.00001; // Scaled force for calculating velocity (Without scaling, the velocity is too strong to be seen on screen)
+	float newVelocity = square->getVelocity() - forceScaled;
 	square->setVelocity(newVelocity);
 	square->updateLocation();
 }
 
-bool isColliding(Rectangle& rect, Square* sqr)
+bool isColliding(Rectangle& rect, Square* square)
 {
 
-	float sqrLeft = sqr->vertices[6];
-	float sqrRight = sqr->vertices[0];
-	float sqrTop = sqr->vertices[10];
-	float sqrBottom = sqr->vertices[4];
+	float sqrLeft = square->vertices[6];
+	float sqrRight = square->vertices[0];
+	float sqrTop = square->vertices[10];
+	float sqrBottom = square->vertices[4];
 
 	float rectLeft = rect.vertices[0];
 	float rectRight = rect.vertices[3];
@@ -43,34 +42,35 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 	// We cant make this false afterwards otherwise it would instantly be cleared next frame by glClear
 	if (drawSquare)
 	{
-		for (auto square : ptr->squaresCreated)
+		for (Square* square : ptr->squaresCreated)
 		{
 			calculateVelocity(square, deltaTime);
 			square->draw();
 
 			bool collided = isColliding(rect, square);
-			square->fallingFlag = !collided; // Square will always fall unless a collision happens
+			square->setFallingFlag(!collided); // Square will always fall unless a collision happens
 
 			// If square hits rectangle
 			if (collided)
 			{
+				square->setIsTouching();
+
 				rect.updatePosition(square);
 				
 				// Add bounce if bounce is not over 10, in which case ground the object
-				if (square->numberOfTimesBounced >= 10)
+				if (square->getNumberOfTimesBounced() >= 10)
 				{
-					square->velocity = 0.0f;
-					square->fallingFlag = false;
+					square->setVelocity(0.0f);
+					square->setFallingFlag(false);
 				}
 				else
 				{
 					square->addBounce();
 				}
 
-				// Snap Boxes on top of rectangle
+				// Snap Boxes on top of rectangle (Penetration resolution)
 				float overlap = square->vertices[4] - rect.vertices[7];
 
-				// This is technically O(n^2) but its 4 iterations so it really doesn't matter
 				for (int i = 1; i < square->vertices.size(); i += 3) {
 					square->vertices[i] -= overlap; // correct y-axis
 				}
@@ -79,6 +79,7 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 			// Delete oldest object once we go over threshold
 			if (ptr->squaresCreated.size() > MAX_AMOUNT_OF_OBJECTS)
 			{
+				rect.compression(square);
 				Square* oldestSquare = ptr->squaresCreated[0];
 				delete oldestSquare;
 				ptr->squaresCreated.erase(ptr->squaresCreated.begin());
@@ -87,10 +88,13 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 	}
 	else if (!ptr->squaresCreated.empty() && !drawSquare)
 	{
-		for (auto square : ptr->squaresCreated)
+		for (Square* square : ptr->squaresCreated)
 		{
+			rect.compression(square);
+			rect.setClearSquaresFlag(true);
 			delete square; // Delete pointer objects and clear the array of null values so the screen is genuienly reset with no dangling pointers or memory leaks
 			ptr->squaresCreated.clear();
 		}
+		rect.setClearSquaresFlag(false);
 	}
 }

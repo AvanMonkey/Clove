@@ -19,7 +19,7 @@ public:
 		-0.2f, 0.7f, 0.0f   // top-left
 		};
 
-		originalTopLeftYCoordinate = vertices[10];
+		originalCoordinates = vertices;
 
 		ArrayObject.bindArray();
 		BufferObject.bindBuffer(GL_ARRAY_BUFFER);
@@ -45,17 +45,28 @@ public:
 
 	void updatePosition(Square* square);
 
-	/// update displacement
-	void setDisplacement(float newX) { x = newX; };
-
-	/// \brief Work out the force being applied to the object
-	float getSprintConstant() { return k;  };
+	void compression(Square* square);
 
 	/// \brief Store the vertices of the Rectangle
 	std::vector<float> vertices;
 
 	/// \brief Store original Top Left Coordinate's Y axis to work out displacement
-	float originalTopLeftYCoordinate;
+	std::vector<float> originalCoordinates;
+
+	/// \brief Work out the force being applied to the object
+	float getSprintConstant() { return k; };
+
+	/// \brief update displacement
+	void setDisplacement(float newX) {
+		x = newX;
+		overallX += newX;
+	};
+
+	/// \brief Return flag stating whether or not squares have  been cleared
+	bool getClearSquaresFlag() { return clearSquares; };
+
+	/// \brief Return flag stating whether or not squares have  been cleared
+	void setClearSquaresFlag(bool value) { clearSquares = value; };
 
 private:
 	unsigned int indices[6] =
@@ -69,4 +80,10 @@ private:
 
 	/// \brief Displacement in length from extension
 	float x = 0.0f;
+
+	/// \brief Flag stating whether or not user has cleared all squares
+	bool clearSquares = false;
+
+	/// \brief Overall displacement of the object
+	float overallX = 0.0f;
 };

@@ -45,11 +45,12 @@ public:
 	/// \brief Update square's location based on factor's such as gravity
 	void updateLocation();
 
-	/// \brief Return the object's current velocity
-	float getVelocity() { return velocity; };
+	/// \brief Add bounce to object through inverting position
+	void addBounce() { positionY = -positionY; };
 
-	/// \brief Update the object's Velocity
-	void setVelocity(float newVelocity) { velocity = newVelocity; };
+	/// \brief Store the vertices of the Square
+	std::vector<float> vertices;
+
 
 	/// \brief Return object's weight
 	float getMass() { return mass; };
@@ -66,20 +67,24 @@ public:
 	/// \brief Get Flag stating whether or not to apply mass to rectangle
 	bool getApplyForce() { return applyForce; };
 
-	/// \brief Add bounce to object through inverting position
-	void addBounce() { positionY = -positionY; };
+	void setFallingFlag(bool newFlag) { fallingFlag = newFlag; };
 
-	/// \brief Store the vertices of the Square
-	std::vector<float> vertices;
+	bool getFallingFlag() { return fallingFlag; };
 
-	/// States whether or not square is falling
-	bool fallingFlag = false;
+	void setNumberOfTimesBounced() { numberOfTimesBounced += 1; };
 
-	/// \brief If the square is grounded
-	int numberOfTimesBounced;
+	int getNumberOfTimesBounced() { return numberOfTimesBounced; };
 
-	/// \brief Object's Velocity
-	float velocity = 0;
+	/// \brief Return the object's current velocity
+	float getVelocity() { return velocity; };
+
+	/// \brief Update the object's Velocity
+	void setVelocity(float newVelocity) { velocity = newVelocity; };
+
+	void setIsTouching() { isTouching = !isTouching; };
+
+	bool getIsTouching() { return isTouching; };
+
 private:
 
 	float decay;
@@ -102,4 +107,15 @@ private:
 
 	/// \brief Flag to show whether or not a square can apply force (Will be false after collision to prevent force being applied multiple times)
 	bool applyForce = true;
+
+	/// States whether or not square is falling
+	bool fallingFlag = false;
+
+	/// \brief If the square is grounded
+	int numberOfTimesBounced;
+
+	/// \brief Object's Velocity
+	float velocity = 0;
+
+	bool isTouching = false;
 };
