@@ -48,4 +48,6 @@ void Square::updateLocation()
 	// Enable Settings
 	glEnableVertexAttribArray(vertexLocation);
 	// End of adapted code
+
+
 }

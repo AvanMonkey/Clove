@@ -67,12 +67,16 @@ public:
 	/// \brief Get Flag stating whether or not to apply mass to rectangle
 	bool getApplyForce() { return applyForce; };
 
+	/// \brief Set Flag stating whether or not object is falling
 	void setFallingFlag(bool newFlag) { fallingFlag = newFlag; };
 
+	/// \brief Get Flag stating whether or not object is falling
 	bool getFallingFlag() { return fallingFlag; };
 
+	/// \brief Increment number of times the object has bounced
 	void setNumberOfTimesBounced() { numberOfTimesBounced += 1; };
 
+	/// \brief Get the number of times the object has bounced
 	int getNumberOfTimesBounced() { return numberOfTimesBounced; };
 
 	/// \brief Return the object's current velocity
@@ -81,12 +85,15 @@ public:
 	/// \brief Update the object's Velocity
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
 
+	/// \brief Set a flag to determine whether or not a square is touching the platform
 	void setIsTouching() { isTouching = !isTouching; };
 
+	/// \brief Get the 'Is touching square' flag
 	bool getIsTouching() { return isTouching; };
 
 private:
 
+	/// \brief Bounce decay
 	float decay;
 
 	/// \brief Indicates the order to draw coordinates to create a square
@@ -117,5 +124,6 @@ private:
 	/// \brief Object's Velocity
 	float velocity = 0;
 
+	/// \brief Is the Object touching the Rectangle?
 	bool isTouching = false;
 };

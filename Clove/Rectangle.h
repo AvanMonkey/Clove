@@ -41,11 +41,11 @@ public:
 	};
 	~Rectangle() = default;
 
+	/// \brief Draw the Object on the screen
 	void draw();
 
-	void updatePosition(Square* square);
-
-	void compression(Square* square);
+	/// \brief Update the object's position
+	void updatePosition();
 
 	/// \brief Store the vertices of the Rectangle
 	std::vector<float> vertices;
@@ -57,16 +57,43 @@ public:
 	float getSprintConstant() { return k; };
 
 	/// \brief update displacement
-	void setDisplacement(float newX) {
-		x = newX;
-		overallX += newX;
-	};
+	void setDisplacement(float newX) { x = newX; };
 
 	/// \brief Return flag stating whether or not squares have  been cleared
 	bool getClearSquaresFlag() { return clearSquares; };
 
 	/// \brief Return flag stating whether or not squares have  been cleared
 	void setClearSquaresFlag(bool value) { clearSquares = value; };
+
+	/// \brief Return Reference to squares touching vector
+	std::vector<Square*>& getSquaresTouching() { return squaresTouching; };
+
+	/// \brief Add to Squares Touching Vector
+	void setSquaresTouching(Square* square) { squaresTouching.push_back(square); };
+
+	/// \brief Return true if square is found in 'squaresTouching'
+	bool findSquaresTouching(Square* square) 
+	{ 
+		auto it = std::find(squaresTouching.begin(), squaresTouching.end(), square);
+		if (it != squaresTouching.end())
+		{
+			return true;
+		}
+		return false;
+	};
+
+	/// \brief Erase an item in 'squaresTouching'
+	void eraseItemInSquaresTouching(Square* square)
+	{
+		auto it = std::find(squaresTouching.begin(), squaresTouching.end(), square);
+		if (it != squaresTouching.end())
+		{
+			squaresTouching.erase(it);
+		}
+	}
+
+	/// \brief Clear Squares Touching Vector
+	void clearSquaresTouching() { squaresTouching.clear(); };
 
 private:
 	unsigned int indices[6] =
@@ -84,6 +111,7 @@ private:
 	/// \brief Flag stating whether or not user has cleared all squares
 	bool clearSquares = false;
 
-	/// \brief Overall displacement of the object
-	float overallX = 0.0f;
+	/// \brief Vector of all the squares touching the object.
+	std::vector<Square*> squaresTouching;
+
 };

@@ -55,8 +55,18 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 			{
 				square->setIsTouching();
 
-				rect.updatePosition(square);
+				// Make sure we only put square in array once
+				if (square->getApplyForce())
+				{
+					bool squareFound = rect.findSquaresTouching(square);
+					if (!squareFound)
+					{
+						rect.setSquaresTouching(square);
+					}
+				}
 				
+				rect.updatePosition();
+
 				// Add bounce if bounce is not over 10, in which case ground the object
 				if (square->getNumberOfTimesBounced() >= 10)
 				{
@@ -79,8 +89,10 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 			// Delete oldest object once we go over threshold
 			if (ptr->squaresCreated.size() > MAX_AMOUNT_OF_OBJECTS)
 			{
-				rect.compression(square);
 				Square* oldestSquare = ptr->squaresCreated[0];
+				
+				rect.eraseItemInSquaresTouching(square);
+				rect.updatePosition();
 				delete oldestSquare;
 				ptr->squaresCreated.erase(ptr->squaresCreated.begin());
 			}
@@ -88,13 +100,12 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 	}
 	else if (!ptr->squaresCreated.empty() && !drawSquare)
 	{
+		rect.clearSquaresTouching();
+		rect.updatePosition();
 		for (Square* square : ptr->squaresCreated)
 		{
-			rect.compression(square);
-			rect.setClearSquaresFlag(true);
 			delete square; // Delete pointer objects and clear the array of null values so the screen is genuienly reset with no dangling pointers or memory leaks
 			ptr->squaresCreated.clear();
 		}
-		rect.setClearSquaresFlag(false);
 	}
 }
