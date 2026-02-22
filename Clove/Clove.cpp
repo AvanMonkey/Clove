@@ -25,9 +25,10 @@ void Tick(GLFWwindow* window, std::atomic<bool>& running)
 
     while (!glfwWindowShouldClose(window) && running)
     {
-        deltaTime = lastTick - clock();
+        deltaTime = (clock() - lastTick) / CLOCKS_PER_SEC;
         lastTick = clock();
 
+        printf("%f Delta Time\n", deltaTime);
         renderer(window, rect, ptr, deltaTime);
 
         glfwSwapBuffers(window);

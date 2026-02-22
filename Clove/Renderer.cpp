@@ -4,32 +4,31 @@ void calculateVelocity(Square* square, float deltaTime)
 {
 	square->setForce(GRAVITY * deltaTime * square->getMass()); // Force = Mass * Gravity
 
-	float forceScaled = square->getForce() * 0.00001; // Scaled force for calculating velocity (Without scaling, the velocity is too strong to be seen on screen)
-	float newVelocity = square->getVelocity() - forceScaled;
+	float forceScaled = square->getForce() * 0.001; // THIS IS ONLY FOR THE GRAPHICAL SIDE OF THINGS. NOT USED FOR CALCULATIONS RELATED TO HOOKES LAW. THE REASON FOR THIS IS THAT USING THE REAL FORCE FOR VELOCITY MAKES BOXES TOO FAST WHEN BEING PLACED
+	float newVelocity = square->getVelocity() + forceScaled * deltaTime;
 	square->setVelocity(newVelocity);
 	square->updateLocation();
 }
 
 bool isColliding(Rectangle& rect, Square* square)
 {
+	float sqrLeft = square->getVertices()[6];
+	float sqrRight = square->getVertices()[0];
+	float sqrTop = square->getVertices()[10];
+	float sqrBottom = square->getVertices()[4];
 
-	float sqrLeft = square->vertices[6];
-	float sqrRight = square->vertices[0];
-	float sqrTop = square->vertices[10];
-	float sqrBottom = square->vertices[4];
-
-	float rectLeft = rect.vertices[0];
-	float rectRight = rect.vertices[3];
-	float rectTop = rect.vertices[7];
-	float rectBottom = rect.vertices[1];
+	float rectLeft = rect.getVertices()[0];
+	float rectRight = rect.getVertices()[3];
+	float rectTop = rect.getVertices()[7];
+	float rectBottom = rect.getVertices()[1];
 
 	// Code adapted from Aristurtle Dev (2024) https://www.youtube.com/watch?v=UOfbGeq0ZkM
 	
-	// AABB Collision detection
-	return sqrRight > rectLeft &&
-		sqrLeft < rectRight &&
-		sqrTop > rectBottom &&
-		sqrBottom < rectTop;
+		// AABB Collision detection
+		return sqrRight > rectLeft &&
+			sqrLeft < rectRight &&
+			sqrTop > rectBottom &&
+			sqrBottom < rectTop;
 
 	// End of adapted code
 }
@@ -76,10 +75,10 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 				}
 
 				// Snap Boxes on top of rectangle (Penetration resolution)
-				float overlap = square->vertices[4] - rect.vertices[7];
+				float overlap = square->getVertices()[4] - rect.getVertices()[7];
 
-				for (int i = 1; i < square->vertices.size(); i += 3) {
-					square->vertices[i] -= overlap; // correct y-axis
+				for (int i = 1; i < square->getVertices().size(); i += 3) {
+					square->getVertices()[i] -= overlap; // correct y-axis
 				}
 			}
 

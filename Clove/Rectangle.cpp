@@ -1,5 +1,7 @@
 #include "Rectangle.h"
 #include <glad/glad.h>
+#include "Rectangle.h"
+#include <glad/glad.h>
 
 void Rectangle::draw() {
 	ArrayObject.bindArray();
@@ -10,12 +12,13 @@ void Rectangle::draw() {
 
 void Rectangle::updatePosition(float deltaTime)
 {
-
-    deltaTime = deltaTime / CLOCKS_PER_SEC * 100;
     float netForce = 0.0f;
-    float decay = 0.5;
-    float decayValue = -decay * velocity;
-    for (Square* s : squaresTouching) {
+    float decayValue = -getDecay() * velocity; // Decay will be given to rectangle to stop oscillation
+    std::vector<float>& verticesOfObject = getVertices();
+
+    std::vector<Square*>& squaresTouchingRectangle = getSquaresTouching();
+
+    for (Square* s : squaresTouchingRectangle) {
         netForce += s->getForce();
     }
 
@@ -23,14 +26,16 @@ void Rectangle::updatePosition(float deltaTime)
 
     netForce = netForce + springForce + decayValue;
 
-    float acceleration = netForce / mass; // a = F/m
+    printf("%f Force on Rectangle\n", netForce);
 
-    velocity = acceleration * deltaTime; // v = a * t
-    x += velocity * deltaTime;
+    float acceleration = netForce / getMass(); // a = F/m
 
+    updateVelocity(acceleration, deltaTime); // v = a * t
+
+    updateDisplacement(velocity, deltaTime);
 
     for (int i = 1; i < vertices.size(); i += 3) {
-        vertices[i] = originalCoordinates[i] + x;
+        verticesOfObject[i] = getOriginalCoordinates()[i] - x;
     }
 
     // Update GPU buffers (same as before)
@@ -60,9 +65,9 @@ bool Rectangle::findSquaresTouching(Square* square)
 void Rectangle::eraseItemInSquaresTouching(Square* square) {
 
      std::vector<Square*>& squaresTouchingRectangle = getSquaresTouching();
-    auto it = std::find(squaresTouching.begin(), squaresTouching.end(), square);
-    if (it != squaresTouching.end())
+    auto it = std::find(squaresTouchingRectangle.begin(), squaresTouchingRectangle.end(), square);
+    if (it != squaresTouchingRectangle.end())
     {
-        squaresTouching.erase(it);
+        squaresTouchingRectangle.erase(it);
     }
 }

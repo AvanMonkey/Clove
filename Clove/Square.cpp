@@ -12,22 +12,25 @@ void Square::draw() {
 
 void Square::updateLocation()
 {
+	float& posY = getPositionY();
+	std::vector<float>& verticesOfObject = getVertices();
+
 	// Falling
-	if (fallingFlag)
+	if (getFallingFlag())
 	{
-		positionY += velocity;
+		posY += getVelocity();
 	}
 	// Bouncing (as objects will bounce when they hit a surface like in real life)
 	else
 	{
-		positionY *= decay;
-		numberOfTimesBounced += 1; // This is so after the ball bounces 12 times, it comes to a stop, otherwise it would just vibrate (I genuienly can't work out a way to make this smooth so i'm doing it like this)
+		posY *= getDecay();
+		incrementNumberOfTimesBounced(); // This is so after the ball bounces 12 times, it comes to a stop, otherwise it would just vibrate (I genuienly can't work out a way to make this smooth so i'm doing it like this)
 	}
 
 	// Apply gravity to squares through changing the y axis of each vertices by velocity
 	for (int i = 1; i < vertices.size(); i += 3)
 	{
-		vertices[i] -= positionY;
+		verticesOfObject[i] -= posY;
 	}
 
 	// Code adapted from LearnOpenGL (2026)
@@ -48,6 +51,4 @@ void Square::updateLocation()
 	// Enable Settings
 	glEnableVertexAttribArray(vertexLocation);
 	// End of adapted code
-
-
 }

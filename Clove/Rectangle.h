@@ -11,7 +11,7 @@ public:
 		vertexSize = 3;
 		stride = 3;
 
-		vertices =
+		std::vector<float> verticesCoordinates =
 		{
 		-0.2f, 0.5f, 0.0f,  // bottom-left
 		 0.2f, 0.5f, 0.0f,  // bottom-right
@@ -19,7 +19,9 @@ public:
 		-0.2f, 0.7f, 0.0f   // top-left
 		};
 
-		originalCoordinates = vertices;
+		setVertices(verticesCoordinates);
+
+		setOriginalCoordinates(getVertices()); // We could use verticesCoordinates, but this way we can ensure that we are genuienly making a copy of vertices
 
 		ArrayObject.bindArray();
 		BufferObject.bindBuffer(GL_ARRAY_BUFFER);
@@ -47,17 +49,26 @@ public:
 	/// \brief Update the object's position
 	void updatePosition(float deltaTime);
 
-	/// \brief Store the vertices of the Rectangle
-	std::vector<float> vertices;
+	/// \brief Return reference to coordinates of object's vertices
+	std::vector<float>& getVertices() { return vertices; };
 
-	/// \brief Store original Top Left Coordinate's Y axis to work out displacement
-	std::vector<float> originalCoordinates;
+	/// \brief Set object's vertices coordinates
+	void setVertices(std::vector<float> newVertices) { vertices = newVertices; };
+
+	/// \brief Return coordinates of original object location on initialisation
+	std::vector<float> getOriginalCoordinates(){return originalCoordinates; };
+
+	/// \brief Set original coordinates to be saved should the original vector be changed
+	void setOriginalCoordinates(std::vector<float> newOriginalCoordinates) { originalCoordinates = newOriginalCoordinates; };
 
 	/// \brief Work out the force being applied to the object
 	float getSprintConstant() { return k; };
 
-	/// \brief update displacement
+	/// \brief Set displacement
 	void setDisplacement(float newX) { x = newX; };
+
+	/// \brief Update displacement
+	void updateDisplacement(float value, float deltaTime) { x += value * deltaTime; };
 
 	/// \brief Return flag stating whether or not squares have  been cleared
 	bool getClearSquaresFlag() { return clearSquares; };
@@ -74,11 +85,17 @@ public:
 	/// \brief Return the Velocity of the object
 	float getVelocity() { return velocity; };
 
-	/// \brief Update Velocity
+	/// \brief Set Velocity
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
+
+	/// \brief Update Velocity
+	void updateVelocity(float value, float deltaTime) { velocity += value * deltaTime; };
 
 	/// \brief Return the Mass of the object
 	float getMass() { return mass; };
+
+	/// \brief Return the oscillation decay of the object
+	float getDecay() { return decay; };
 
 	/// \brief Return true if square is found in 'squaresTouching'
 	bool findSquaresTouching(Square* square);
@@ -96,6 +113,12 @@ private:
 		1, 2, 3
 	};
 
+	/// \brief Store the vertices of the Rectangle
+	std::vector<float> vertices;
+
+	/// \brief Store original Top Left Coordinate's Y axis to work out displacement
+	std::vector<float> originalCoordinates;
+
 	/// \brief How stiff the rectangle is
 	float k = 50.0f;
 
@@ -106,7 +129,7 @@ private:
 	float velocity = 0.0f;
 
 	/// \breif Mass of the Object
-	float mass = 1000.0f;
+	float mass = 1.0f;
 
 	/// \brief Flag stating whether or not user has cleared all squares
 	bool clearSquares = false;
@@ -114,4 +137,6 @@ private:
 	/// \brief Vector of all the squares touching the object.
 	std::vector<Square*> squaresTouching;
 
+	/// \brief Decay given to object oscillation
+	float decay = 2.0;
 };

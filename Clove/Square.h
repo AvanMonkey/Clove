@@ -2,7 +2,7 @@
 #include "Drawable.h";
 #include <iostream>
 #include <random>
-#define GRAVITY  0.09
+#define GRAVITY  9
 
 /// \brief Draw a Rectangle
 class Square : public Drawable {
@@ -14,13 +14,15 @@ public:
 		stride = 3;
 
 		// Add the vertices offset to the coordinates of where the user clicked so we can spawn a sqaure wherever the user clicked
-		vertices =
+		std::vector<float> verticesValues =
 		{
 			0.015f + xpos, 0.025f - ypos, 0.0f, // Top right
 			0.015f + xpos, -0.025f - ypos, 0.0f, // Bottom Right
 			-0.015f + xpos, -0.025f - ypos, 0.0f, // Bottom Left
 			-0.015f + xpos, 0.025f - ypos, 0.0f // Top Left
 		};
+
+		setVertices(verticesValues);
 
 		// I've used random numbers for the decay to make it more realistic. The boxes will have different bounces but still quite similar
 		float min = 0.3;
@@ -32,13 +34,10 @@ public:
 		std::uniform_real_distribution<> distr(min, max);
 
 		// Generate a random number
-		decay = distr(gen); // Decay from bounce so the box gradually comes to a standstill
-
-		numberOfTimesBounced = 0;
+		setDecay(distr(gen)); // Decay from bounce so the box gradually comes to a standstill
 	};
 
 	~Square() = default;
-
 	/// \brief Create a square
 	void draw();
 
@@ -48,9 +47,11 @@ public:
 	/// \brief Add bounce to object through inverting position
 	void addBounce() { positionY = -positionY; };
 
-	/// \brief Store the vertices of the Square
-	std::vector<float> vertices;
+	/// \brief Return reference to vertices vector for general modification uses
+	std::vector<float>& getVertices() { return vertices; };
 
+	/// \brief Set coordinates of object's vertices
+	void setVertices(std::vector<float> newVertices) { vertices = newVertices; };
 
 	/// \brief Return object's weight
 	float getMass() { return mass; };
@@ -73,11 +74,11 @@ public:
 	/// \brief Get Flag stating whether or not object is falling
 	bool getFallingFlag() { return fallingFlag; };
 
-	/// \brief Increment number of times the object has bounced
-	void setNumberOfTimesBounced() { numberOfTimesBounced += 1; };
-
 	/// \brief Get the number of times the object has bounced
 	int getNumberOfTimesBounced() { return numberOfTimesBounced; };
+
+	/// \brief Increment number of times the object has bounced
+	void incrementNumberOfTimesBounced() { numberOfTimesBounced += 1; };
 
 	/// \brief Return the object's current velocity
 	float getVelocity() { return velocity; };
@@ -86,15 +87,27 @@ public:
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
 
 	/// \brief Set a flag to determine whether or not a square is touching the platform
-	void setIsTouching() { isTouching = !isTouching; };
+	void setIsTouching() { isTouching = !isTouching; }
+	
+	/// \brief Set the object's bounce decay value
+	void setDecay(float newDecay) { decay = newDecay; };
+
+	/// \brief return decay of object's bounce
+	float getDecay() { return decay; };
 
 	/// \brief Get the 'Is touching square' flag
 	bool getIsTouching() { return isTouching; };
 
+	// \brief return reference to positionY so that it can be safely modified by the user in external code
+	float& getPositionY() { return positionY; };
+
 private:
 
+	/// \brief Store the vertices of the Square
+	std::vector<float> vertices;
+
 	/// \brief Bounce decay
-	float decay;
+	float decay = 0;
 
 	/// \brief Indicates the order to draw coordinates to create a square
 	unsigned int indices[6] =
@@ -107,7 +120,7 @@ private:
 	float positionY = 0.0f;
 
 	/// \brief Each Square has a mass given to it. This weight is used to work out it's falling velocity.
-	float mass = 1.4f;
+	float mass = 20.0f;
 
 	/// \brief The force a square exerts
 	float force = 0.0f;
@@ -119,7 +132,7 @@ private:
 	bool fallingFlag = false;
 
 	/// \brief If the square is grounded
-	int numberOfTimesBounced;
+	int numberOfTimesBounced = 0;
 
 	/// \brief Object's Velocity
 	float velocity = 0;
