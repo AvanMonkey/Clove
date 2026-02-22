@@ -37,7 +37,6 @@ bool isColliding(Rectangle& rect, Square* square)
 void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float deltaTime)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	rect.draw();
 
 	// We cant make this false afterwards otherwise it would instantly be cleared next frame by glClear
 	if (drawSquare)
@@ -64,8 +63,6 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 						rect.setSquaresTouching(square);
 					}
 				}
-				
-				rect.updatePosition();
 
 				// Add bounce if bounce is not over 10, in which case ground the object
 				if (square->getNumberOfTimesBounced() >= 10)
@@ -92,7 +89,6 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 				Square* oldestSquare = ptr->squaresCreated[0];
 				
 				rect.eraseItemInSquaresTouching(square);
-				rect.updatePosition();
 				delete oldestSquare;
 				ptr->squaresCreated.erase(ptr->squaresCreated.begin());
 			}
@@ -101,11 +97,12 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 	else if (!ptr->squaresCreated.empty() && !drawSquare)
 	{
 		rect.clearSquaresTouching();
-		rect.updatePosition();
 		for (Square* square : ptr->squaresCreated)
 		{
 			delete square; // Delete pointer objects and clear the array of null values so the screen is genuienly reset with no dangling pointers or memory leaks
 			ptr->squaresCreated.clear();
 		}
 	}
+	rect.updatePosition(deltaTime);
+	rect.draw();
 }

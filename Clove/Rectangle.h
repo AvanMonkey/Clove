@@ -27,13 +27,13 @@ public:
 		glEnableVertexAttribArray(0);
 
 		// Load Vertices into GPU
-		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_DYNAMIC_DRAW);
 
 		// Settings of what the shape being drawn will look like, it's position, etc.
 		glVertexAttribPointer(vertexLocation, vertexSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), byteOffset);
 
 		// Load Indices of which Vertices to use into GPU
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
 
 		// Enable Settings
 		glEnableVertexAttribArray(vertexLocation);
@@ -45,7 +45,7 @@ public:
 	void draw();
 
 	/// \brief Update the object's position
-	void updatePosition();
+	void updatePosition(float deltaTime);
 
 	/// \brief Store the vertices of the Rectangle
 	std::vector<float> vertices;
@@ -71,26 +71,20 @@ public:
 	/// \brief Add to Squares Touching Vector
 	void setSquaresTouching(Square* square) { squaresTouching.push_back(square); };
 
+	/// \brief Return the Velocity of the object
+	float getVelocity() { return velocity; };
+
+	/// \brief Update Velocity
+	void setVelocity(float newVelocity) { velocity = newVelocity; };
+
+	/// \brief Return the Mass of the object
+	float getMass() { return mass; };
+
 	/// \brief Return true if square is found in 'squaresTouching'
-	bool findSquaresTouching(Square* square) 
-	{ 
-		auto it = std::find(squaresTouching.begin(), squaresTouching.end(), square);
-		if (it != squaresTouching.end())
-		{
-			return true;
-		}
-		return false;
-	};
+	bool findSquaresTouching(Square* square);
 
 	/// \brief Erase an item in 'squaresTouching'
-	void eraseItemInSquaresTouching(Square* square)
-	{
-		auto it = std::find(squaresTouching.begin(), squaresTouching.end(), square);
-		if (it != squaresTouching.end())
-		{
-			squaresTouching.erase(it);
-		}
-	}
+	void eraseItemInSquaresTouching(Square* square);
 
 	/// \brief Clear Squares Touching Vector
 	void clearSquaresTouching() { squaresTouching.clear(); };
@@ -107,6 +101,12 @@ private:
 
 	/// \brief Displacement in length from extension
 	float x = 0.0f;
+
+	/// \brief Velocity of the Object
+	float velocity = 0.0f;
+
+	/// \breif Mass of the Object
+	float mass = 1000.0f;
 
 	/// \brief Flag stating whether or not user has cleared all squares
 	bool clearSquares = false;
