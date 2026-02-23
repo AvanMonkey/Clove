@@ -13,7 +13,7 @@ void transformCoordinates(GLFWwindow* window, double& xpos, double& ypos)
 	// End of adapted code
 }
 
-// Code adapted from GLFW (2026) https://www.glfw.org/docs/3.3/input_guide.html 
+	// Code adapted from GLFW (2026) https://www.glfw.org/docs/3.3/input_guide.html 
 void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	// Grab Shader Pointer to update look
@@ -28,7 +28,7 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 	// Dark Mode to Light Mode (Vice-Versa)
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 	{
-// End of adapted code
+	// End of adapted code
 		ptr->shader->use();
 		if (ptr->lightMode)
 		{

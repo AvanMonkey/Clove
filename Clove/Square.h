@@ -8,7 +8,7 @@
 
 class Rectangle;  // Forward Declaration
 
-/// \brief Draw a Rectangle
+/// \brief Draw a Square
 class Square : public Drawable {
 public:
 	Square(float xpos, float ypos) {
