@@ -10,7 +10,7 @@ void Tick(GLFWwindow* window)
     float lastTick = clock();
     float deltaTime = 0;
     Rectangle rect;
-    InputPointers* ptr = new InputPointers(float(xpos), float(ypos));
+    InputPointers* ptr = new InputPointers();
     glfwSetWindowUserPointer(window, ptr);
 
     while (!glfwWindowShouldClose(window))
@@ -25,7 +25,6 @@ void Tick(GLFWwindow* window)
         glfwPollEvents();
     }
     // Free memory now that our pointers aren't used anymore (Since the simulators been closed)
-    ptr->deletePointers();
     delete ptr;
 }
 

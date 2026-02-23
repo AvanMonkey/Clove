@@ -2,7 +2,7 @@
 #include <vector>
 #include "Objects.h"
 
-/// Draw Shapes and Objects in the Simulator
+/// \brief Draw Shapes and Objects in the Simulator
 class Drawable {
 public:
 	virtual ~Drawable() {}

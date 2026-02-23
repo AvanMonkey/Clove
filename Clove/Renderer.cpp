@@ -5,7 +5,7 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// We cant make this false afterwards otherwise it would instantly be cleared next frame by glClear
-	if (drawSquare)
+	if (ptr->drawSquare)
 	{
 		for (Square* square : ptr->squaresCreated)
 		{
@@ -60,7 +60,7 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 			}
 		}
 	}
-	else if (!ptr->squaresCreated.empty() && !drawSquare)
+	else if (!ptr->squaresCreated.empty() && !ptr->drawSquare)
 	{
 		rect.clearSquaresTouching();
 		for (Square* square : ptr->squaresCreated)

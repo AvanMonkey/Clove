@@ -94,7 +94,7 @@ public:
 	/// \brief Shader's Float Uniform Setter (Usualy Colour)
 	void setFloat(const std::string& name, float r, float g, float b, float opacity) const;
 
-	// End of adapted code
+		// End of adapted code
 
 
 

@@ -8,12 +8,3 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 /// \brief Process User Mouse Inputs (Dragging Objects)
 /// \param window Context Window </param>
 void processMouseInput(GLFWwindow* window, int button, int action, int mods);
-
-// \brief Theme of app (Light/Dark Mode)
-extern bool lightMode;
-
-// Trigger a square to be drawn
-extern bool drawSquare;
-
-/// \brief X and Y positions of where user clicked. Use to determine square object spawn position
-extern double xpos, ypos;

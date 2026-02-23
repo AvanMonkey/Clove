@@ -1,9 +1,12 @@
 #pragma once
-#include "Drawable.h";
+#include "Drawable.h"
 #include <iostream>
 #include <random>
+#include <glad/glad.h>
 #define MAX_AMOUNT_OF_OBJECTS 30
 #define GRAVITY  9
+
+class Rectangle;  // Forward Declaration
 
 /// \brief Draw a Rectangle
 class Square : public Drawable {
@@ -26,8 +29,8 @@ public:
 		setVertices(verticesValues);
 
 		// I've used random numbers for the decay to make it more realistic. The boxes will have different bounces but still quite similar
-		float min = 0.3;
-		float max = 0.5;
+		double min = 0.3;
+		double max = 0.5;
 
 		std::random_device rd;
 		std::mt19937 gen(rd());
@@ -97,7 +100,7 @@ public:
 	void setIsTouching() { isTouching = !isTouching; }
 	
 	/// \brief Set the object's bounce decay value
-	void setDecay(float newDecay) { decay = newDecay; };
+	void setDecay(double newDecay) { decay = newDecay; };
 
 	/// \brief return decay of object's bounce
 	float getDecay() { return decay; };
@@ -114,7 +117,7 @@ private:
 	std::vector<float> vertices;
 
 	/// \brief Bounce decay
-	float decay = 0;
+	double decay = 0;
 
 	/// \brief Indicates the order to draw coordinates to create a square
 	unsigned int indices[6] =

@@ -1,6 +1,7 @@
 #pragma once
 #include "Drawable.h"
-#include "Square.h"
+
+class Square; // Forward Declaration
 
 /// \brief Draw a Rectangle
 class Rectangle : public Drawable {

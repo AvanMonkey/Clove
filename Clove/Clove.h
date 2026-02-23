@@ -21,16 +21,7 @@
 /// \brief Resize Frame Buffer to match window size upon resize
 void resizeFrameBuffer(GLFWwindow* window, int width, int height);
 
-/// \brief Temporary function which closes window after 10 seconds
-/// \param running Is Program Running?</param>
-void countdown(std::atomic<bool>& running);
-
 /// \brief Do *Blank* every frame
 /// \param window Context Window
 /// \param running Is Program Running?
-void Tick(GLFWwindow* window, std::atomic<bool>& running);
-
-/// \brief Is Program Running?
-extern std::atomic <bool> running;
-
-extern float deltaTime;
+void Tick(GLFWwindow* window);
