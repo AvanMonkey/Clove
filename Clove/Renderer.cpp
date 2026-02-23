@@ -1,38 +1,5 @@
 #include "Renderer.h"
 
-void calculateVelocity(Square* square, float deltaTime)
-{
-	square->setForce(GRAVITY * deltaTime * square->getMass()); // Force = Mass * Gravity
-
-	float forceScaled = square->getForce() * 0.001; // THIS IS ONLY FOR THE GRAPHICAL SIDE OF THINGS. NOT USED FOR CALCULATIONS RELATED TO HOOKES LAW. THE REASON FOR THIS IS THAT USING THE REAL FORCE FOR VELOCITY MAKES BOXES TOO FAST WHEN BEING PLACED
-	float newVelocity = square->getVelocity() + forceScaled * deltaTime;
-	square->setVelocity(newVelocity);
-	square->updateLocation();
-}
-
-bool isColliding(Rectangle& rect, Square* square)
-{
-	float sqrLeft = square->getVertices()[6];
-	float sqrRight = square->getVertices()[0];
-	float sqrTop = square->getVertices()[10];
-	float sqrBottom = square->getVertices()[4];
-
-	float rectLeft = rect.getVertices()[0];
-	float rectRight = rect.getVertices()[3];
-	float rectTop = rect.getVertices()[7];
-	float rectBottom = rect.getVertices()[1];
-
-	// Code adapted from Aristurtle Dev (2024) https://www.youtube.com/watch?v=UOfbGeq0ZkM
-	
-		// AABB Collision detection
-		return sqrRight > rectLeft &&
-			sqrLeft < rectRight &&
-			sqrTop > rectBottom &&
-			sqrBottom < rectTop;
-
-	// End of adapted code
-}
-
 void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float deltaTime)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -42,10 +9,10 @@ void renderer(GLFWwindow* window, Rectangle& rect, InputPointers* ptr, float del
 	{
 		for (Square* square : ptr->squaresCreated)
 		{
-			calculateVelocity(square, deltaTime);
+			square->calculateVelocity(deltaTime);
 			square->draw();
 
-			bool collided = isColliding(rect, square);
+			bool collided = square->isColliding(rect);
 			square->setFallingFlag(!collided); // Square will always fall unless a collision happens
 
 			// If square hits rectangle

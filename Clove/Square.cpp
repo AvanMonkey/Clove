@@ -1,6 +1,7 @@
 #include "Square.h"
 #include <glad/glad.h>
 #include <iostream>
+#include "Rectangle.h"
 
 void Square::draw() {
 
@@ -8,6 +9,39 @@ void Square::draw() {
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, numberOfVertices, GL_UNSIGNED_INT, byteOffset);
+}
+
+void Square::calculateVelocity(float deltaTime)
+{
+	setForce(GRAVITY * deltaTime * getMass()); // Force = Mass * Gravity
+
+	float forceScaled = getForce() * 0.001; // THIS IS ONLY FOR THE GRAPHICAL SIDE OF THINGS. NOT USED FOR CALCULATIONS RELATED TO HOOKES LAW. THE REASON FOR THIS IS THAT USING THE REAL FORCE FOR VELOCITY MAKES BOXES TOO FAST WHEN BEING PLACED
+	float newVelocity = getVelocity() + forceScaled * deltaTime;
+	setVelocity(newVelocity);
+	updateLocation();
+}
+
+bool Square::isColliding(Rectangle& rect)
+{
+	float sqrLeft = getVertices()[6];
+	float sqrRight = getVertices()[0];
+	float sqrTop = getVertices()[10];
+	float sqrBottom = getVertices()[4];
+
+	float rectLeft = rect.getVertices()[0];
+	float rectRight = rect.getVertices()[3];
+	float rectTop = rect.getVertices()[7];
+	float rectBottom = rect.getVertices()[1];
+
+	// Code adapted from Aristurtle Dev (2024) https://www.youtube.com/watch?v=UOfbGeq0ZkM
+
+		// AABB Collision detection
+	return sqrRight > rectLeft &&
+		sqrLeft < rectRight &&
+		sqrTop > rectBottom &&
+		sqrBottom < rectTop;
+
+	// End of adapted code
 }
 
 void Square::updateLocation()

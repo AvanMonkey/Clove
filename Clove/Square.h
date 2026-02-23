@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #define MAX_AMOUNT_OF_OBJECTS 30
+#define GRAVITY  9
 
 /// \brief Draw a Rectangle
 class Square : public Drawable {
@@ -40,6 +41,12 @@ public:
 	~Square() = default;
 	/// \brief Create a square
 	void draw();
+
+	/// \brief Calculates the velocity of an object and it's force.
+	void calculateVelocity(float deltaTime);
+
+	/// \brief Collision detection for when the object touches an rectangle object. (In Clove it'll be the platform)
+	bool isColliding(Rectangle& rect);
 
 	/// \brief Update square's location based on factor's such as gravity
 	void updateLocation();
