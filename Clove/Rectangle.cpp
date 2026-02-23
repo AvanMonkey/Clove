@@ -1,7 +1,5 @@
 #include "Rectangle.h"
 #include <glad/glad.h>
-#include "Rectangle.h"
-#include <glad/glad.h>
 
 void Rectangle::draw() {
 	ArrayObject.bindArray();
@@ -64,7 +62,7 @@ bool Rectangle::findSquaresTouching(Square* square)
 
 void Rectangle::eraseItemInSquaresTouching(Square* square) {
 
-     std::vector<Square*>& squaresTouchingRectangle = getSquaresTouching();
+    std::vector<Square*>& squaresTouchingRectangle = getSquaresTouching();
     auto it = std::find(squaresTouchingRectangle.begin(), squaresTouchingRectangle.end(), square);
     if (it != squaresTouchingRectangle.end())
     {

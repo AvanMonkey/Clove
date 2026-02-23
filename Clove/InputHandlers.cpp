@@ -29,7 +29,7 @@ void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action,
 		(glfwSetWindowShouldClose(window, true));
 	}
 
-	// Shift Polygon view (Fill and Outline)
+	// Dark Mode to Light Mode (Vice-Versa)
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 	{
 // End of adapted code

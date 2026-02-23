@@ -2,7 +2,7 @@
 #include "Drawable.h";
 #include <iostream>
 #include <random>
-#define GRAVITY  9
+#define MAX_AMOUNT_OF_OBJECTS 30
 
 /// \brief Draw a Rectangle
 class Square : public Drawable {

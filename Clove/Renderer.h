@@ -4,7 +4,7 @@
 #include "Rectangle.h"
 #include "Square.h"
 #include "Pointers.h"
-#define MAX_AMOUNT_OF_OBJECTS 10
+#define GRAVITY  9
 
 bool isColliding(Rectangle& rect, Square* sqr);
 
