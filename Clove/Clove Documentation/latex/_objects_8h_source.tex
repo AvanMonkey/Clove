@@ -1,0 +1,43 @@
+\doxysection{Objects.\+h}
+\hypertarget{_objects_8h_source}{}\label{_objects_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <glad/glad.h>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_objects}{Objects}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{virtual}\ \doxymbox{\hyperlink{class_objects}{\string~Objects}}()\ =\ \textcolor{keywordflow}{default};\ \textcolor{comment}{//\ Allows\ child\ classes\ to\ destroy\ both\ the\ Objects\ class\ and\ themselves}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{void}\ bindBuffer(GLenum\ type)\ \{\ glBindBuffer(type,\ \textcolor{keywordtype}{id});\ \};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ getID()\ \{\ \textcolor{keywordflow}{return}\ id;\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id}\ =\ 0;}
+\DoxyCodeLine{00016\ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }VBO\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_objects}{Objects}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ VBO()\ \{\ glGenBuffers(1,\ \&\textcolor{keywordtype}{id});\ \};}
+\DoxyCodeLine{00023\ \ \ \ \ \string~VBO()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }EBO\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_objects}{Objects}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ EBO()\ \{\ glGenBuffers(1,\ \&\textcolor{keywordtype}{id});\ \};}
+\DoxyCodeLine{00031\ \ \ \ \ \string~EBO()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }VAO\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_objects}{Objects}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ VAO()\ \{\ glGenVertexArrays(1,\ \&\textcolor{keywordtype}{id});\ \};}
+\DoxyCodeLine{00039\ \ \ \ \ \string~VAO()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ bindArray()\ \{\ glBindVertexArray(\textcolor{keywordtype}{id});\ \};}
+\DoxyCodeLine{00042\ \};}
+
+\end{DoxyCode}

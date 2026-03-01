@@ -1,0 +1,38 @@
+\doxysection{Pointers.\+h}
+\hypertarget{_pointers_8h_source}{}\label{_pointers_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Clove.h"{}}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{struct\ }InputPointers}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ InputPointers()}
+\DoxyCodeLine{00009\ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_input_pointers_aa2cf1c5aae925f43cde8a98a8913f4dd}{shader}}\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{class_shaders}{Shaders}}(SHADER\_PATH,\ FRAGMENT\_PATH);}
+\DoxyCodeLine{00011\ \ \ \ \ \}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ \ \ \ \ \doxymbox{\hyperlink{struct_input_pointers_a0995c6fe87ce329abb97d9a3cb5e324b}{\string~InputPointers}}()\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \doxymbox{\hyperlink{struct_input_pointers_aa2cf1c5aae925f43cde8a98a8913f4dd}{shader}};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_input_pointers_aa2cf1c5aae925f43cde8a98a8913f4dd}{shader}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\doxymbox{\hyperlink{class_square}{Square}}*\ square\ :\ \doxymbox{\hyperlink{struct_input_pointers_a7688c6ba1ed7983ca6d75258f1418a64}{squaresCreated}})}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ square;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_input_pointers_a7688c6ba1ed7983ca6d75258f1418a64}{squaresCreated}}.clear();}
+\DoxyCodeLine{00023\ \ \ \ \ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \ \ \ \ \doxymbox{\hyperlink{class_shaders}{Shaders}}*\ \doxymbox{\hyperlink{struct_input_pointers_aa2cf1c5aae925f43cde8a98a8913f4dd}{shader}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \ \ \ \ std::vector<Square*>\ \doxymbox{\hyperlink{struct_input_pointers_a7688c6ba1ed7983ca6d75258f1418a64}{squaresCreated}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_input_pointers_a6a4f03afcfa10ff1fb7c4b205f2fd25b}{lightMode}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_input_pointers_a0a3c102fa1d6c0c237c18157954a37cc}{drawSquare}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_input_pointers_af3ba00a5d45790176c3d948cb6044455}{xpos}}\ =\ 0.0;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{struct_input_pointers_ae46e2c35cf0c0942efd62835d6e1aa78}{ypos}}\ =\ 0.0;}
+\DoxyCodeLine{00042\ \};}
+
+\end{DoxyCode}

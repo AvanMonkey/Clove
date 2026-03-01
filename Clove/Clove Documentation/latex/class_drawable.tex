@@ -1,0 +1,64 @@
+\doxysection{Drawable Class Reference}
+\hypertarget{class_drawable}{}\label{class_drawable}\index{Drawable@{Drawable}}
+
+
+Draw Shapes and \doxylink{class_objects}{Objects} in the Simulator.  
+
+
+
+
+{\ttfamily \+\#include $<$Drawable.\+h$>$}
+
+Inheritance diagram for Drawable:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_drawable}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_drawable_a1231e00fe6022c2ff0e8d61fd23c5c23}\label{class_drawable_a1231e00fe6022c2ff0e8d61fd23c5c23} 
+void {\bfseries draw} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_drawable_ae849a18d9d1d773296e989eba7dd2629}\label{class_drawable_ae849a18d9d1d773296e989eba7dd2629} 
+std::\+vector$<$ float $>$ {\bfseries vertices}
+\begin{DoxyCompactList}\small\item\em Shape Corners. \end{DoxyCompactList}\item 
+\Hypertarget{class_drawable_a05e97a08b64108240ba601c7e5dd106c}\label{class_drawable_a05e97a08b64108240ba601c7e5dd106c} 
+std::\+vector$<$ unsigned int $>$ {\bfseries indices}
+\begin{DoxyCompactList}\small\item\em Use to select specific vertices to draw. \end{DoxyCompactList}\item 
+\Hypertarget{class_drawable_a53f37eb8bc7fe707ba54cfd335074011}\label{class_drawable_a53f37eb8bc7fe707ba54cfd335074011} 
+unsigned int {\bfseries number\+Of\+Vertices} = 0
+\begin{DoxyCompactList}\small\item\em How many Vertices we wish to draw. \end{DoxyCompactList}\item 
+\Hypertarget{class_drawable_a3b19002ee026753707d7d8c99d64b775}\label{class_drawable_a3b19002ee026753707d7d8c99d64b775} 
+unsigned int {\bfseries vertex\+Location} = 0
+\begin{DoxyCompactList}\small\item\em Vertex attribute index in Shader. \end{DoxyCompactList}\item 
+\Hypertarget{class_drawable_af8a81cdf0cd5e8f10f0e0a743b065a2b}\label{class_drawable_af8a81cdf0cd5e8f10f0e0a743b065a2b} 
+unsigned int {\bfseries vertex\+Size} = 0
+\begin{DoxyCompactList}\small\item\em How many dimensions is the vector. \end{DoxyCompactList}\item 
+\Hypertarget{class_drawable_a20079f316b1c57da702eb6c30e2157c5}\label{class_drawable_a20079f316b1c57da702eb6c30e2157c5} 
+unsigned int {\bfseries stride} = 0
+\begin{DoxyCompactList}\small\item\em The space between consectuive vertex attributes (In Bytes). \end{DoxyCompactList}\item 
+\Hypertarget{class_drawable_a0c42ed35b71fac5ebfb3454455e16ea7}\label{class_drawable_a0c42ed35b71fac5ebfb3454455e16ea7} 
+const void \texorpdfstring{$\ast$}{*} {\bfseries byte\+Offset} = nullptr
+\begin{DoxyCompactList}\small\item\em Offset in \doxylink{class_v_b_o}{VBO}. \end{DoxyCompactList}\item 
+\Hypertarget{class_drawable_a3d89ae6a31a5b58b90ac565ace32d7fc}\label{class_drawable_a3d89ae6a31a5b58b90ac565ace32d7fc} 
+\doxymbox{\hyperlink{class_v_a_o}{VAO}} {\bfseries Array\+Object}
+\item 
+\Hypertarget{class_drawable_aab9ee1713670a053e269d88258b35b1f}\label{class_drawable_aab9ee1713670a053e269d88258b35b1f} 
+\doxymbox{\hyperlink{class_v_b_o}{VBO}} {\bfseries Buffer\+Object}
+\item 
+\Hypertarget{class_drawable_ad66fe8c62ac5f6f599eac0e61e39b78b}\label{class_drawable_ad66fe8c62ac5f6f599eac0e61e39b78b} 
+\doxymbox{\hyperlink{class_e_b_o}{EBO}} {\bfseries Element\+Buffer\+Object}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Draw Shapes and \doxylink{class_objects}{Objects} in the Simulator. 
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Drawable.\+h\end{DoxyCompactItemize}

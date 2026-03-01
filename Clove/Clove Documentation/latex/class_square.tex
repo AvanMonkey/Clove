@@ -1,0 +1,233 @@
+\doxysection{Square Class Reference}
+\hypertarget{class_square}{}\label{class_square}\index{Square@{Square}}
+
+
+Draw a \doxylink{class_square}{Square}.  
+
+
+
+
+{\ttfamily \+\#include $<$Square.\+h$>$}
+
+Inheritance diagram for Square:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_square}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_square_a9f4e2dfe530266a8a6a903725bafb022}\label{class_square_a9f4e2dfe530266a8a6a903725bafb022} 
+{\bfseries Square} (float xpos, float ypos)
+\item 
+\Hypertarget{class_square_a2a8be87e5cb58dd25a8af0f6166536b9}\label{class_square_a2a8be87e5cb58dd25a8af0f6166536b9} 
+void {\bfseries draw} ()
+\begin{DoxyCompactList}\small\item\em Create a square. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_square_a7865564d570fd4731b22ca0db82a602a}{calculate\+Velocity}} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Calculates the velocity of an object and it\textquotesingle{}s force. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_square_a9c77d12549d2054ed332a4b3461d0a26}{is\+Colliding}} (\doxymbox{\hyperlink{class_rectangle}{Rectangle}} \&rect)
+\begin{DoxyCompactList}\small\item\em Collision detection for when the object touches an rectangle object. (In Clove it\textquotesingle{}ll be the platform). \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a1e511ef0f3cd3145561fbc455bdc0036}\label{class_square_a1e511ef0f3cd3145561fbc455bdc0036} 
+void {\bfseries update\+Location} ()
+\begin{DoxyCompactList}\small\item\em Update square\textquotesingle{}s location based on factor\textquotesingle{}s such as gravity. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a2db1165767fe0005c29b8b15c36bcde0}\label{class_square_a2db1165767fe0005c29b8b15c36bcde0} 
+void {\bfseries add\+Bounce} ()
+\begin{DoxyCompactList}\small\item\em Add bounce to object through inverting position. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a91ff1bf950084a54e8ee5f97e1388421}\label{class_square_a91ff1bf950084a54e8ee5f97e1388421} 
+std::\+vector$<$ float $>$ \& {\bfseries get\+Vertices} ()
+\begin{DoxyCompactList}\small\item\em Return reference to vertices vector for general modification uses. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_square_abe577917c64b6d083f237db49b359923}{set\+Vertices}} (std::\+vector$<$ float $>$ new\+Vertices)
+\begin{DoxyCompactList}\small\item\em Set coordinates of object\textquotesingle{}s vertices. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a8ff90f731c059a1a1b64a8682ecd3c3d}\label{class_square_a8ff90f731c059a1a1b64a8682ecd3c3d} 
+float {\bfseries get\+Mass} () const
+\begin{DoxyCompactList}\small\item\em Return object\textquotesingle{}s weight. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_square_ad6183974aa636224bb1e3ceccc1566b0}{set\+Force}} (float new\+Force)
+\begin{DoxyCompactList}\small\item\em Set object\textquotesingle{}s force. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a68f719a0bdcf7c7269c27f43d5806284}\label{class_square_a68f719a0bdcf7c7269c27f43d5806284} 
+float {\bfseries get\+Force} () const
+\begin{DoxyCompactList}\small\item\em Return object\textquotesingle{}s force. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_af0e6587a3a7dbc761e7704fde350030a}\label{class_square_af0e6587a3a7dbc761e7704fde350030a} 
+void {\bfseries set\+Apply\+Force} ()
+\begin{DoxyCompactList}\small\item\em Set flag to apply object\textquotesingle{}s mass or not to rectangle. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a80f93ec0b33bb85fe856d4a68492bee3}\label{class_square_a80f93ec0b33bb85fe856d4a68492bee3} 
+bool {\bfseries get\+Apply\+Force} () const
+\begin{DoxyCompactList}\small\item\em Get Flag stating whether or not to apply mass to rectangle. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_square_a0800512bacd0a6b031ed25b2aad1a8e2}{set\+Falling\+Flag}} (bool new\+Flag)
+\begin{DoxyCompactList}\small\item\em Set Flag stating whether or not object is falling. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a9120161fef2d1870ed30108514ab8f2b}\label{class_square_a9120161fef2d1870ed30108514ab8f2b} 
+bool {\bfseries get\+Falling\+Flag} () const
+\begin{DoxyCompactList}\small\item\em Get Flag stating whether or not object is falling. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a4d804e6310a0c90852893bd8fbf93a9f}\label{class_square_a4d804e6310a0c90852893bd8fbf93a9f} 
+int {\bfseries get\+Number\+Of\+Times\+Bounced} () const
+\begin{DoxyCompactList}\small\item\em Get the number of times the object has bounced. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a4c07a45f12b77fbe4d1433863658bb6f}\label{class_square_a4c07a45f12b77fbe4d1433863658bb6f} 
+void {\bfseries increment\+Number\+Of\+Times\+Bounced} ()
+\begin{DoxyCompactList}\small\item\em Increment number of times the object has bounced. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_af69401316e9711704a97c76df95596c6}\label{class_square_af69401316e9711704a97c76df95596c6} 
+float {\bfseries get\+Velocity} () const
+\begin{DoxyCompactList}\small\item\em Return the object\textquotesingle{}s current velocity. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_square_a1c53f0d11f94d0a3bffc18a83a5fba9b}{set\+Velocity}} (float new\+Velocity)
+\begin{DoxyCompactList}\small\item\em Update the object\textquotesingle{}s Velocity. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_afa7b20b2ad5ea3411acab4a485aab968}\label{class_square_afa7b20b2ad5ea3411acab4a485aab968} 
+void {\bfseries set\+Is\+Touching} ()
+\begin{DoxyCompactList}\small\item\em Set a flag to determine whether or not a square is touching the platform. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_square_a4a3eeee3bbdf6c40ae34c96fcb8c46fd}{set\+Decay}} (float new\+Decay)
+\begin{DoxyCompactList}\small\item\em Set the object\textquotesingle{}s bounce decay value. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a6ad254974d05cc36ca96a63dc1f16e9e}\label{class_square_a6ad254974d05cc36ca96a63dc1f16e9e} 
+float {\bfseries get\+Decay} () const
+\begin{DoxyCompactList}\small\item\em return decay of object\textquotesingle{}s bounce \end{DoxyCompactList}\item 
+\Hypertarget{class_square_ac46b4aeda057671c86288fb1f0e01132}\label{class_square_ac46b4aeda057671c86288fb1f0e01132} 
+bool {\bfseries get\+Is\+Touching} () const
+\begin{DoxyCompactList}\small\item\em Get the \textquotesingle{}Is touching square\textquotesingle{} flag. \end{DoxyCompactList}\item 
+\Hypertarget{class_square_a3b1279bed578b7fa6f76fc5d3439fc96}\label{class_square_a3b1279bed578b7fa6f76fc5d3439fc96} 
+float \& {\bfseries get\+PositionY} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \doxymbox{\hyperlink{class_drawable}{Drawable}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries draw} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \doxymbox{\hyperlink{class_drawable}{Drawable}}}
+\begin{DoxyCompactItemize}
+\item 
+std::\+vector$<$ float $>$ {\bfseries vertices}
+\begin{DoxyCompactList}\small\item\em Shape Corners. \end{DoxyCompactList}\item 
+std::\+vector$<$ unsigned int $>$ {\bfseries indices}
+\begin{DoxyCompactList}\small\item\em Use to select specific vertices to draw. \end{DoxyCompactList}\item 
+unsigned int {\bfseries number\+Of\+Vertices} = 0
+\begin{DoxyCompactList}\small\item\em How many Vertices we wish to draw. \end{DoxyCompactList}\item 
+unsigned int {\bfseries vertex\+Location} = 0
+\begin{DoxyCompactList}\small\item\em Vertex attribute index in Shader. \end{DoxyCompactList}\item 
+unsigned int {\bfseries vertex\+Size} = 0
+\begin{DoxyCompactList}\small\item\em How many dimensions is the vector. \end{DoxyCompactList}\item 
+unsigned int {\bfseries stride} = 0
+\begin{DoxyCompactList}\small\item\em The space between consectuive vertex attributes (In Bytes). \end{DoxyCompactList}\item 
+const void \texorpdfstring{$\ast$}{*} {\bfseries byte\+Offset} = nullptr
+\begin{DoxyCompactList}\small\item\em Offset in \doxylink{class_v_b_o}{VBO}. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{class_v_a_o}{VAO}} {\bfseries Array\+Object}
+\item 
+\doxymbox{\hyperlink{class_v_b_o}{VBO}} {\bfseries Buffer\+Object}
+\item 
+\doxymbox{\hyperlink{class_e_b_o}{EBO}} {\bfseries Element\+Buffer\+Object}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Draw a \doxylink{class_square}{Square}. 
+
+\label{doc-func-members}
+\Hypertarget{class_square_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_square_a7865564d570fd4731b22ca0db82a602a}\index{Square@{Square}!calculateVelocity@{calculateVelocity}}
+\index{calculateVelocity@{calculateVelocity}!Square@{Square}}
+\doxysubsubsection{\texorpdfstring{calculateVelocity()}{calculateVelocity()}}
+{\footnotesize\ttfamily \label{class_square_a7865564d570fd4731b22ca0db82a602a} 
+void Square::\+calculate\+Velocity (\begin{DoxyParamCaption}\item[{float}]{delta\+Time}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the velocity of an object and it\textquotesingle{}s force. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+Time} & Time between frames \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_square_a9c77d12549d2054ed332a4b3461d0a26}\index{Square@{Square}!isColliding@{isColliding}}
+\index{isColliding@{isColliding}!Square@{Square}}
+\doxysubsubsection{\texorpdfstring{isColliding()}{isColliding()}}
+{\footnotesize\ttfamily \label{class_square_a9c77d12549d2054ed332a4b3461d0a26} 
+bool Square::\+is\+Colliding (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_rectangle}{Rectangle}} \&}]{rect}{}\end{DoxyParamCaption})}
+
+
+
+Collision detection for when the object touches an rectangle object. (In Clove it\textquotesingle{}ll be the platform). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rect} & \doxylink{class_rectangle}{Rectangle} being operated on \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_square_a4a3eeee3bbdf6c40ae34c96fcb8c46fd}\index{Square@{Square}!setDecay@{setDecay}}
+\index{setDecay@{setDecay}!Square@{Square}}
+\doxysubsubsection{\texorpdfstring{setDecay()}{setDecay()}}
+{\footnotesize\ttfamily \label{class_square_a4a3eeee3bbdf6c40ae34c96fcb8c46fd} 
+void Square::\+set\+Decay (\begin{DoxyParamCaption}\item[{float}]{new\+Decay}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the object\textquotesingle{}s bounce decay value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Decay} & New decay value \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_square_a0800512bacd0a6b031ed25b2aad1a8e2}\index{Square@{Square}!setFallingFlag@{setFallingFlag}}
+\index{setFallingFlag@{setFallingFlag}!Square@{Square}}
+\doxysubsubsection{\texorpdfstring{setFallingFlag()}{setFallingFlag()}}
+{\footnotesize\ttfamily \label{class_square_a0800512bacd0a6b031ed25b2aad1a8e2} 
+void Square::\+set\+Falling\+Flag (\begin{DoxyParamCaption}\item[{bool}]{new\+Flag}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set Flag stating whether or not object is falling. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Flag} & New value for falling\+Flag \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_square_ad6183974aa636224bb1e3ceccc1566b0}\index{Square@{Square}!setForce@{setForce}}
+\index{setForce@{setForce}!Square@{Square}}
+\doxysubsubsection{\texorpdfstring{setForce()}{setForce()}}
+{\footnotesize\ttfamily \label{class_square_ad6183974aa636224bb1e3ceccc1566b0} 
+void Square::\+set\+Force (\begin{DoxyParamCaption}\item[{float}]{new\+Force}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set object\textquotesingle{}s force. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Force} & New force value \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_square_a1c53f0d11f94d0a3bffc18a83a5fba9b}\index{Square@{Square}!setVelocity@{setVelocity}}
+\index{setVelocity@{setVelocity}!Square@{Square}}
+\doxysubsubsection{\texorpdfstring{setVelocity()}{setVelocity()}}
+{\footnotesize\ttfamily \label{class_square_a1c53f0d11f94d0a3bffc18a83a5fba9b} 
+void Square::\+set\+Velocity (\begin{DoxyParamCaption}\item[{float}]{new\+Velocity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update the object\textquotesingle{}s Velocity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Velocity} & New velocity value \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_square_abe577917c64b6d083f237db49b359923}\index{Square@{Square}!setVertices@{setVertices}}
+\index{setVertices@{setVertices}!Square@{Square}}
+\doxysubsubsection{\texorpdfstring{setVertices()}{setVertices()}}
+{\footnotesize\ttfamily \label{class_square_abe577917c64b6d083f237db49b359923} 
+void Square::\+set\+Vertices (\begin{DoxyParamCaption}\item[{std::\+vector$<$ float $>$}]{new\+Vertices}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set coordinates of object\textquotesingle{}s vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Vertices} & New vertices values \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Square.\+h\item 
+Square.\+cpp\end{DoxyCompactItemize}

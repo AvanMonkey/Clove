@@ -1,6 +1,7 @@
 #pragma once
 #include <GLFW/glfw3.h>
 
+/// \brief Settings given to the window that will be used to display the GUI
 struct WindowSettings {
 	int width = 1280;
 

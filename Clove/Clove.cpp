@@ -32,7 +32,7 @@ void Tick(GLFWwindow* window)
             fpsInt = static_cast<int>(fps);
 
             start_time = glfwGetTime();
-            printf("\nFPS updated\n");
+            printf("\nFPS updated\n\n");
         }
 
         std::string fpsTitle = "Physics Engine          FPS: " + std::to_string(fpsInt) + "         Number of objects: " + std::to_string(ptr->squaresCreated.size()) + " | 30";

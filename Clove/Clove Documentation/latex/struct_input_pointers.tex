@@ -1,0 +1,46 @@
+\doxysection{Input\+Pointers Struct Reference}
+\hypertarget{struct_input_pointers}{}\label{struct_input_pointers}\index{InputPointers@{InputPointers}}
+
+
+Struct to hold pointers and variables that we use in GLFW callback functions where it is not possible to pass by reference. Reason for multiple pointers is because \textquotesingle{}glfw\+Set\+Window\+User\+Pointer\textquotesingle{} only hold\textquotesingle{}s 1 pointer, so by storing all necessary pointers in a struct and pointing to this struct, we can access more than 1 pointer in callback functions.  
+
+
+
+
+{\ttfamily \+\#include $<$Pointers.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_input_pointers_a0995c6fe87ce329abb97d9a3cb5e324b}\label{struct_input_pointers_a0995c6fe87ce329abb97d9a3cb5e324b} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Input\+Pointers} ()
+\begin{DoxyCompactList}\small\item\em Free pointers stored in struct (Needs to be done before deleting struct pointer). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_input_pointers_aa2cf1c5aae925f43cde8a98a8913f4dd}\label{struct_input_pointers_aa2cf1c5aae925f43cde8a98a8913f4dd} 
+\doxymbox{\hyperlink{class_shaders}{Shaders}} \texorpdfstring{$\ast$}{*} {\bfseries shader}
+\begin{DoxyCompactList}\small\item\em Pointer to a Shader object. \end{DoxyCompactList}\item 
+\Hypertarget{struct_input_pointers_a7688c6ba1ed7983ca6d75258f1418a64}\label{struct_input_pointers_a7688c6ba1ed7983ca6d75258f1418a64} 
+std::\+vector$<$ \doxymbox{\hyperlink{class_square}{Square}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries squares\+Created}
+\begin{DoxyCompactList}\small\item\em Holds all \doxylink{class_square}{Square}\textquotesingle{}s created and their values so we can draw them all to screen as unique objects. \end{DoxyCompactList}\item 
+\Hypertarget{struct_input_pointers_a6a4f03afcfa10ff1fb7c4b205f2fd25b}\label{struct_input_pointers_a6a4f03afcfa10ff1fb7c4b205f2fd25b} 
+bool {\bfseries light\+Mode} = false
+\begin{DoxyCompactList}\small\item\em Theme of app (Light/\+\+Dark Mode). \end{DoxyCompactList}\item 
+\Hypertarget{struct_input_pointers_a0a3c102fa1d6c0c237c18157954a37cc}\label{struct_input_pointers_a0a3c102fa1d6c0c237c18157954a37cc} 
+bool {\bfseries draw\+Square} = false
+\begin{DoxyCompactList}\small\item\em Trigger a square to be drawn. \end{DoxyCompactList}\item 
+\Hypertarget{struct_input_pointers_af3ba00a5d45790176c3d948cb6044455}\label{struct_input_pointers_af3ba00a5d45790176c3d948cb6044455} 
+double {\bfseries xpos} = 0.\+0
+\begin{DoxyCompactList}\small\item\em X position of where user clicked. Used to determine square object spawn position. \end{DoxyCompactList}\item 
+\Hypertarget{struct_input_pointers_ae46e2c35cf0c0942efd62835d6e1aa78}\label{struct_input_pointers_ae46e2c35cf0c0942efd62835d6e1aa78} 
+double {\bfseries ypos} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Y position of where user clicked. Used to determine square object spawn position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Struct to hold pointers and variables that we use in GLFW callback functions where it is not possible to pass by reference. Reason for multiple pointers is because \textquotesingle{}glfw\+Set\+Window\+User\+Pointer\textquotesingle{} only hold\textquotesingle{}s 1 pointer, so by storing all necessary pointers in a struct and pointing to this struct, we can access more than 1 pointer in callback functions. 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Pointers.\+h\end{DoxyCompactItemize}

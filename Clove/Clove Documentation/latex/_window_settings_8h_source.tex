@@ -1,0 +1,24 @@
+\doxysection{Window\+Settings.\+h}
+\hypertarget{_window_settings_8h_source}{}\label{_window_settings_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <GLFW/glfw3.h>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_window_settings}{WindowSettings}}\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keywordtype}{int}\ width\ =\ 1280;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{int}\ height\ =\ 720;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{char}\ title[50]\ =\ \textcolor{stringliteral}{"{}Physics\ Engine"{}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ GLFWmonitor*\ monitor\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ GLFWwindow*\ share\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ Used\ by\ the\ GLAD\ to\ set\ the\ viewport\ origin\ when\ mapping\ the\ framebuffer\ to\ the\ display\ window}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ lowerLeftCornerX\ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ lowerLeftCornerY\ =\ 0;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \};}
+
+\end{DoxyCode}

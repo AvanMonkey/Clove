@@ -1,0 +1,123 @@
+\doxysection{Square.\+h}
+\hypertarget{_square_8h_source}{}\label{_square_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}Drawable.h"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <glad/glad.h>}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ MAX\_AMOUNT\_OF\_OBJECTS\ =\ 30;}
+\DoxyCodeLine{00007\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ GRAVITY\ =\ 9;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_rectangle}{Rectangle}};\ \ \textcolor{comment}{//\ Forward\ Declaration}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }Square\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{class_drawable}{Drawable}}\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ Square(\textcolor{keywordtype}{float}\ xpos,\ \textcolor{keywordtype}{float}\ ypos)\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_drawable_a53f37eb8bc7fe707ba54cfd335074011}{numberOfVertices}}\ =\ 6;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_drawable_a3b19002ee026753707d7d8c99d64b775}{vertexLocation}}\ =\ 0;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_drawable_af8a81cdf0cd5e8f10f0e0a743b065a2b}{vertexSize}}\ =\ 3;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_drawable_a20079f316b1c57da702eb6c30e2157c5}{stride}}\ =\ 3;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ vertices\ offset\ to\ the\ coordinates\ of\ where\ the\ user\ clicked\ so\ we\ can\ spawn\ a\ sqaure\ wherever\ the\ user\ clicked}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::vector<float>\ verticesValues\ =}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ 0.015f\ +\ xpos,\ 0.025f\ -\/\ ypos,\ 0.0f,\ \textcolor{comment}{//\ Top\ right}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ 0.015f\ +\ xpos,\ -\/0.025f\ -\/\ ypos,\ 0.0f,\ \textcolor{comment}{//\ Bottom\ Right}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ -\/0.015f\ +\ xpos,\ -\/0.025f\ -\/\ ypos,\ 0.0f,\ \textcolor{comment}{//\ Bottom\ Left}}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ -\/0.015f\ +\ xpos,\ 0.025f\ -\/\ ypos,\ 0.0f\ \textcolor{comment}{//\ Top\ Left}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_square_abe577917c64b6d083f237db49b359923}{setVertices}}(verticesValues);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ I've\ used\ random\ numbers\ for\ the\ decay\ to\ make\ it\ more\ realistic.\ The\ boxes\ will\ have\ different\ bounces\ but\ still\ quite\ similar}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ min\ =\ 0.3;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ max\ =\ 0.5;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::random\_device\ rd;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::mt19937\ gen(rd());}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::uniform\_real\_distribution<>\ distr(min,\ max);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ a\ random\ number}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_square_a4a3eeee3bbdf6c40ae34c96fcb8c46fd}{setDecay}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(distr(gen)));\ \textcolor{comment}{//\ Decay\ from\ bounce\ so\ the\ box\ gradually\ comes\ to\ a\ standstill}}
+\DoxyCodeLine{00042\ \ \ \ \ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \string~Square()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a2a8be87e5cb58dd25a8af0f6166536b9}{draw}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a7865564d570fd4731b22ca0db82a602a}{calculateVelocity}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_square_a9c77d12549d2054ed332a4b3461d0a26}{isColliding}}(\doxymbox{\hyperlink{class_rectangle}{Rectangle}}\&\ rect);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a1e511ef0f3cd3145561fbc455bdc0036}{updateLocation}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a2db1165767fe0005c29b8b15c36bcde0}{addBounce}}()\ \{\ positionY\ =\ -\/positionY;\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \ \ \ \ std::vector<float>\&\ \doxymbox{\hyperlink{class_square_a91ff1bf950084a54e8ee5f97e1388421}{getVertices}}()\ \{\ \textcolor{keywordflow}{return}\ vertices;\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_abe577917c64b6d083f237db49b359923}{setVertices}}(std::vector<float>\ newVertices)\ \{\ vertices\ =\ newVertices;\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_square_a8ff90f731c059a1a1b64a8682ecd3c3d}{getMass}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ mass;\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_ad6183974aa636224bb1e3ceccc1566b0}{setForce}}(\textcolor{keywordtype}{float}\ newForce)\ \{\ force\ =\ newForce;\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_square_a68f719a0bdcf7c7269c27f43d5806284}{getForce}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ force;\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_af0e6587a3a7dbc761e7704fde350030a}{setApplyForce}}()\ \{\ applyForce\ =\ !applyForce;\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_square_a80f93ec0b33bb85fe856d4a68492bee3}{getApplyForce}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ applyForce;\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a0800512bacd0a6b031ed25b2aad1a8e2}{setFallingFlag}}(\textcolor{keywordtype}{bool}\ newFlag)\ \{\ fallingFlag\ =\ newFlag;\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_square_a9120161fef2d1870ed30108514ab8f2b}{getFallingFlag}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ fallingFlag;\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_square_a4d804e6310a0c90852893bd8fbf93a9f}{getNumberOfTimesBounced}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ numberOfTimesBounced;\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a4c07a45f12b77fbe4d1433863658bb6f}{incrementNumberOfTimesBounced}}()\ \{\ numberOfTimesBounced\ +=\ 1;\ \};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_square_af69401316e9711704a97c76df95596c6}{getVelocity}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ velocity;\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a1c53f0d11f94d0a3bffc18a83a5fba9b}{setVelocity}}(\textcolor{keywordtype}{float}\ newVelocity)\ \{\ velocity\ =\ newVelocity;\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_afa7b20b2ad5ea3411acab4a485aab968}{setIsTouching}}()\ \{\ isTouching\ =\ !isTouching;\ \}}
+\DoxyCodeLine{00107\ \ \ \ \ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_square_a4a3eeee3bbdf6c40ae34c96fcb8c46fd}{setDecay}}\ (\textcolor{keywordtype}{float}\ newDecay)\ \{\ decay\ =\ newDecay;\ \};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{class_square_a6ad254974d05cc36ca96a63dc1f16e9e}{getDecay}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ decay;\ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_square_ac46b4aeda057671c86288fb1f0e01132}{getIsTouching}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ isTouching;\ \};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{//\ \(\backslash\)brief\ return\ reference\ to\ positionY\ so\ that\ it\ can\ be\ safely\ modified\ by\ the\ user\ in\ external\ code}}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{float}\&\ getPositionY()\ \{\ \textcolor{keywordflow}{return}\ positionY;\ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00124\ \ \ \ \ std::vector<float>\ vertices;}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{float}\ decay\ =\ 0;}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ indices[6]\ =}
+\DoxyCodeLine{00131\ \ \ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ 0,\ 1,\ 3,}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ 1,\ 2,\ 3}
+\DoxyCodeLine{00134\ \ \ \ \ \};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{float}\ positionY\ =\ 0.0f;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{float}\ mass\ =\ 20.0f;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{float}\ force\ =\ 0.0f;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{bool}\ applyForce\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ fallingFlag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{int}\ numberOfTimesBounced\ =\ 0;}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{float}\ velocity\ =\ 0;}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{bool}\ isTouching\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00159\ \};}
+
+\end{DoxyCode}
