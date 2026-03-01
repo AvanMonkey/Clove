@@ -80,10 +80,10 @@ public:
 	}
 
 	/// Allow for shaderID access should it be manually requested
-	unsigned int getID() { return shaderID; };
+	const unsigned int getID() { return shaderID; };
 
 	/// brief Use the Shader
-	void use();
+	const void use();
 
 	/// \brief Shader's Boolean Uniform Setter
 	void setBool(const std::string& name, bool value) const; // Const is used here so any member variables are immutable and can't be changed
@@ -99,7 +99,7 @@ public:
 
 
 	/// \brief Check for errors during shader compilation process
-	void errorCheck(std::string errorMessage);
+	const void errorCheck(std::string errorMessage);
 
 	~Shaders() = default;
 private:

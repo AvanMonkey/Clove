@@ -3,8 +3,8 @@
 #include <iostream>
 #include <random>
 #include <glad/glad.h>
-#define MAX_AMOUNT_OF_OBJECTS 30
-#define GRAVITY  9
+constexpr int MAX_AMOUNT_OF_OBJECTS = 30;
+constexpr int GRAVITY = 9;
 
 class Rectangle;  // Forward Declaration
 
@@ -64,34 +64,34 @@ public:
 	void setVertices(std::vector<float> newVertices) { vertices = newVertices; };
 
 	/// \brief Return object's weight
-	float getMass() { return mass; };
+	float getMass() const { return mass; };
 
 	/// \brief Set object's force
 	void setForce(float newForce) { force = newForce; };
 
 	/// \brief Return object's force
-	float getForce() { return force; };
+	float getForce() const { return force; };
 
 	/// \brief Set flag to apply object's mass or not to rectangle
 	void setApplyForce() { applyForce = !applyForce; };
 
 	/// \brief Get Flag stating whether or not to apply mass to rectangle
-	bool getApplyForce() { return applyForce; };
+	bool getApplyForce() const { return applyForce; };
 
 	/// \brief Set Flag stating whether or not object is falling
 	void setFallingFlag(bool newFlag) { fallingFlag = newFlag; };
 
 	/// \brief Get Flag stating whether or not object is falling
-	bool getFallingFlag() { return fallingFlag; };
+	bool getFallingFlag() const { return fallingFlag; };
 
 	/// \brief Get the number of times the object has bounced
-	int getNumberOfTimesBounced() { return numberOfTimesBounced; };
+	int getNumberOfTimesBounced() const { return numberOfTimesBounced; };
 
 	/// \brief Increment number of times the object has bounced
 	void incrementNumberOfTimesBounced() { numberOfTimesBounced += 1; };
 
 	/// \brief Return the object's current velocity
-	float getVelocity() { return velocity; };
+	float getVelocity() const { return velocity; };
 
 	/// \brief Update the object's Velocity
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
@@ -100,13 +100,13 @@ public:
 	void setIsTouching() { isTouching = !isTouching; }
 	
 	/// \brief Set the object's bounce decay value
-	void setDecay(float newDecay) { decay = newDecay; };
+	void setDecay (float newDecay) { decay = newDecay; };
 
 	/// \brief return decay of object's bounce
-	float getDecay() { return decay; };
+	float getDecay() const { return decay; };
 
 	/// \brief Get the 'Is touching square' flag
-	bool getIsTouching() { return isTouching; };
+	bool getIsTouching() const { return isTouching; };
 
 	// \brief return reference to positionY so that it can be safely modified by the user in external code
 	float& getPositionY() { return positionY; };

@@ -63,7 +63,7 @@ public:
 	void setOriginalCoordinates(std::vector<float> newOriginalCoordinates) { originalCoordinates = newOriginalCoordinates; };
 
 	/// \brief Work out the force being applied to the object
-	float getSprintConstant() { return k; };
+	float getSprintConstant() const { return k; };
 
 	/// \brief Set displacement
 	void setDisplacement(float newX) { x = newX; };
@@ -72,7 +72,7 @@ public:
 	void updateDisplacement(float value, float deltaTime) { x += value * deltaTime; };
 
 	/// \brief Return flag stating whether or not squares have  been cleared
-	bool getClearSquaresFlag() { return clearSquares; };
+	bool getClearSquaresFlag() const { return clearSquares; };
 
 	/// \brief Return flag stating whether or not squares have  been cleared
 	void setClearSquaresFlag(bool value) { clearSquares = value; };
@@ -84,7 +84,7 @@ public:
 	void setSquaresTouching(Square* square) { squaresTouching.push_back(square); };
 
 	/// \brief Return the Velocity of the object
-	float getVelocity() { return velocity; };
+	float getVelocity() const { return velocity; };
 
 	/// \brief Set Velocity
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
@@ -93,10 +93,10 @@ public:
 	void updateVelocity(float value, float deltaTime) { velocity += value * deltaTime; };
 
 	/// \brief Return the Mass of the object
-	float getMass() { return mass; };
+	float getMass() const { return mass; };
 
 	/// \brief Return the oscillation decay of the object
-	float getDecay() { return decay; };
+	float getDecay() const { return decay; };
 
 	/// \brief Return true if square is found in 'squaresTouching'
 	bool findSquaresTouching(Square* square);
@@ -121,7 +121,7 @@ private:
 	std::vector<float> originalCoordinates;
 
 	/// \brief How stiff the rectangle is
-	float k = 50.0f;
+	const float k = 50.0f;
 
 	/// \brief Displacement in length from extension
 	float x = 0.0f;

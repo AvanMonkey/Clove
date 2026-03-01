@@ -1,6 +1,9 @@
 #pragma once
 #include "Clove.h"
 
+/// \brief Transform given coordinates to be compatible with a GLFW window
+void transformCoordinates(GLFWwindow* window, double& xpos, double& ypos);
+
 /// \brief Process User Keyboard Inputs (Toggles)
 /// \param window Context Window </param>
 void processKeyboardInput(GLFWwindow* window, int key, int scancode, int action, int mods);
