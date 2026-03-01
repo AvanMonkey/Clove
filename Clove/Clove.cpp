@@ -15,6 +15,7 @@ void Tick(GLFWwindow* window)
     // End of adapted code
     Rectangle rect;
     InputPointers* ptr = new InputPointers();
+    int fpsInt = 0;
     glfwSetWindowUserPointer(window, ptr);
     while (!glfwWindowShouldClose(window))
     {
@@ -28,14 +29,14 @@ void Tick(GLFWwindow* window)
         if (glfwGetTime() - start_time >= 1.0)
         {
             fps = 1 / deltaTime;
-            int fpsInt = static_cast<int>(fps);          // round FPS to integer
-            std::string fpsTitle = "Physics Engine      FPS: " + std::to_string(fpsInt);
-            glfwSetWindowTitle(window, fpsTitle.c_str()); // pass as const char* to GLFW
+            fpsInt = static_cast<int>(fps);          // round FPS to integer
 
-            glfwSetWindowTitle(window, fpsTitle.c_str());
             start_time = glfwGetTime();
-            printf("FPS updated\n");
+            printf("\nFPS updated\n");
         }
+
+        std::string fpsTitle = "Physics Engine      FPS: " + std::to_string(fpsInt) + "     Number of objects: " + std::to_string(ptr->squaresCreated.size());
+        glfwSetWindowTitle(window, fpsTitle.c_str());
     }
     // Free memory now that our pointers aren't used anymore (Since the simulators been closed)
     delete ptr;
