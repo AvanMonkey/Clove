@@ -9,20 +9,33 @@ void Tick(GLFWwindow* window)
 {
     float lastTick = clock();
     float deltaTime = 0;
+    float fps = 0;
+    // Code adapted from GLFW (2026) https://www.glfw.org/docs/3.0/group__time.html
+    double start_time = glfwGetTime();
+    // End of adapted code
     Rectangle rect;
     InputPointers* ptr = new InputPointers();
     glfwSetWindowUserPointer(window, ptr);
-
     while (!glfwWindowShouldClose(window))
     {
         deltaTime = (clock() - lastTick) / CLOCKS_PER_SEC;
         lastTick = clock();
-
-        printf("%f Delta Time\n", deltaTime);
         renderer(window, rect, ptr, deltaTime);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        if (glfwGetTime() - start_time >= 1.0)
+        {
+            fps = 1 / deltaTime;
+            int fpsInt = static_cast<int>(fps);          // round FPS to integer
+            std::string fpsTitle = "Physics Engine      FPS: " + std::to_string(fpsInt);
+            glfwSetWindowTitle(window, fpsTitle.c_str()); // pass as const char* to GLFW
+
+            glfwSetWindowTitle(window, fpsTitle.c_str());
+            start_time = glfwGetTime();
+            printf("FPS updated\n");
+        }
     }
     // Free memory now that our pointers aren't used anymore (Since the simulators been closed)
     delete ptr;
