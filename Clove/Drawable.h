@@ -15,16 +15,16 @@ protected:
 	std::vector<unsigned int> indices;
 
 	/// \brief How many Vertices we wish to draw
-	unsigned int numberOfVertices;
+	unsigned int numberOfVertices = 0;
 
 	/// \brief Vertex attribute index in Shader
-	unsigned int vertexLocation;
+	unsigned int vertexLocation = 0;
 
 	/// \brief How many dimensions is the vector
-	unsigned int vertexSize;
+	unsigned int vertexSize = 0;
 
 	/// \brief The space between consectuive vertex attributes (In Bytes)
-	unsigned int stride; 
+	unsigned int stride = 0; 
 
 	/// \brief Offset in VBO
 	const void* byteOffset = nullptr;

@@ -56,7 +56,7 @@ void processMouseInput(GLFWwindow* window, int button, int action, int mods)
 		ptr->drawSquare = true; 
 		transformCoordinates(window, ptr->xpos, ptr->ypos);
 		
-		Square* sqr = new Square(ptr->xpos, ptr->ypos);
+		Square* sqr = new Square(static_cast<float>(ptr->xpos), static_cast<float>(ptr->ypos));
 
 		ptr->squaresCreated.push_back(sqr);
 	}

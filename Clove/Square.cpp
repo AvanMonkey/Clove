@@ -12,7 +12,7 @@ void Square::calculateVelocity(float deltaTime)
 {
 	setForce(GRAVITY * deltaTime * getMass()); // Force = Mass * Gravity
 
-	float forceScaled = getForce() * 0.001; // THIS IS ONLY FOR THE GRAPHICAL SIDE OF THINGS. NOT USED FOR CALCULATIONS RELATED TO HOOKES LAW. THE REASON FOR THIS IS THAT USING THE REAL FORCE FOR VELOCITY MAKES BOXES TOO FAST WHEN BEING PLACED
+	float forceScaled = getForce() * 0.001f; // THIS IS ONLY FOR THE GRAPHICAL SIDE OF THINGS. NOT USED FOR CALCULATIONS RELATED TO HOOKES LAW. THE REASON FOR THIS IS THAT USING THE REAL FORCE FOR VELOCITY MAKES BOXES TOO FAST WHEN BEING PLACED
 	float newVelocity = getVelocity() + forceScaled * deltaTime;
 	setVelocity(newVelocity);
 	updateLocation();

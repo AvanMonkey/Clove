@@ -38,7 +38,7 @@ public:
 		std::uniform_real_distribution<> distr(min, max);
 
 		// Generate a random number
-		setDecay(distr(gen)); // Decay from bounce so the box gradually comes to a standstill
+		setDecay(static_cast<float>(distr(gen))); // Decay from bounce so the box gradually comes to a standstill
 	};
 
 	~Square() = default;
@@ -100,7 +100,7 @@ public:
 	void setIsTouching() { isTouching = !isTouching; }
 	
 	/// \brief Set the object's bounce decay value
-	void setDecay(double newDecay) { decay = newDecay; };
+	void setDecay(float newDecay) { decay = newDecay; };
 
 	/// \brief return decay of object's bounce
 	float getDecay() { return decay; };
@@ -117,7 +117,7 @@ private:
 	std::vector<float> vertices;
 
 	/// \brief Bounce decay
-	double decay = 0;
+	float decay = 0;
 
 	/// \brief Indicates the order to draw coordinates to create a square
 	unsigned int indices[6] =
