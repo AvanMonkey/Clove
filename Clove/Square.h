@@ -46,9 +46,11 @@ public:
 	void draw();
 
 	/// \brief Calculates the velocity of an object and it's force.
+	/// \param deltaTime Time between frames
 	void calculateVelocity(float deltaTime);
 
 	/// \brief Collision detection for when the object touches an rectangle object. (In Clove it'll be the platform)
+	/// \param rect Rectangle being operated on
 	bool isColliding(Rectangle& rect);
 
 	/// \brief Update square's location based on factor's such as gravity
@@ -61,12 +63,14 @@ public:
 	std::vector<float>& getVertices() { return vertices; };
 
 	/// \brief Set coordinates of object's vertices
+	/// \param newVertices New vertices values
 	void setVertices(std::vector<float> newVertices) { vertices = newVertices; };
 
 	/// \brief Return object's weight
 	float getMass() const { return mass; };
 
 	/// \brief Set object's force
+	/// \param newForce New force value
 	void setForce(float newForce) { force = newForce; };
 
 	/// \brief Return object's force
@@ -79,6 +83,7 @@ public:
 	bool getApplyForce() const { return applyForce; };
 
 	/// \brief Set Flag stating whether or not object is falling
+	/// \param newFlag New value for fallingFlag
 	void setFallingFlag(bool newFlag) { fallingFlag = newFlag; };
 
 	/// \brief Get Flag stating whether or not object is falling
@@ -94,12 +99,14 @@ public:
 	float getVelocity() const { return velocity; };
 
 	/// \brief Update the object's Velocity
+	/// \param newVelocity New velocity value
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
 
 	/// \brief Set a flag to determine whether or not a square is touching the platform
 	void setIsTouching() { isTouching = !isTouching; }
 	
 	/// \brief Set the object's bounce decay value
+	/// \param newDecay New decay value
 	void setDecay (float newDecay) { decay = newDecay; };
 
 	/// \brief return decay of object's bounce

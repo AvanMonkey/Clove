@@ -48,48 +48,59 @@ public:
 	void draw();
 
 	/// \brief Update the object's position
+	/// \param deltaTime Time between frames
 	void updatePosition(float deltaTime);
 
 	/// \brief Return reference to coordinates of object's vertices
 	std::vector<float>& getVertices() { return vertices; };
 
 	/// \brief Set object's vertices coordinates
+	/// \param newVertices New vertices location
 	void setVertices(std::vector<float> newVertices) { vertices = newVertices; };
 
 	/// \brief Return coordinates of original object location on initialisation
 	std::vector<float> getOriginalCoordinates(){return originalCoordinates; };
 
 	/// \brief Set original coordinates to be saved should the original vector be changed
+	/// \param newOriginalCoordinates Save a set of coordinates (Should be the original coordinates of the object)
 	void setOriginalCoordinates(std::vector<float> newOriginalCoordinates) { originalCoordinates = newOriginalCoordinates; };
 
 	/// \brief Work out the force being applied to the object
 	float getSprintConstant() const { return k; };
 
 	/// \brief Set displacement
+	/// \param newX New X value
 	void setDisplacement(float newX) { x = newX; };
 
 	/// \brief Update displacement
+	/// \param value Additional displacement value being added to the overall displacement
+	/// \param deltaTime The time between frames
 	void updateDisplacement(float value, float deltaTime) { x += value * deltaTime; };
 
 	/// \brief Return flag stating whether or not squares have  been cleared
 	bool getClearSquaresFlag() const { return clearSquares; };
 
 	/// \brief Return flag stating whether or not squares have  been cleared
+	/// \param value Update the flag on whether or not to clear the square vector
 	void setClearSquaresFlag(bool value) { clearSquares = value; };
 
 	/// \brief Return Reference to squares touching vector
 	std::vector<Square*>& getSquaresTouching() { return squaresTouching; };
 
 	/// \brief Add to Squares Touching Vector
+	/// \param square Pointer to a specific square
 	void setSquaresTouching(Square* square) { squaresTouching.push_back(square); };
 
 	/// \brief Return the Velocity of the object
 	float getVelocity() const { return velocity; };
 
 	/// \brief Set Velocity
+	/// \param newVelocity New velocity value
 	void setVelocity(float newVelocity) { velocity = newVelocity; };
 
 	/// \brief Update Velocity
+	/// \param value New value to be added to overall object velocity
+	/// \param deltaTime Time between frames
 	void updateVelocity(float value, float deltaTime) { velocity += value * deltaTime; };
 
 	/// \brief Return the Mass of the object
@@ -99,9 +110,11 @@ public:
 	float getDecay() const { return decay; };
 
 	/// \brief Return true if square is found in 'squaresTouching'
+	/// \param square The square being operated on
 	bool findSquaresTouching(Square* square);
 
 	/// \brief Erase an item in 'squaresTouching'
+	/// \param square Square being operated on
 	void eraseItemInSquaresTouching(Square* square);
 
 	/// \brief Clear Squares Touching Vector

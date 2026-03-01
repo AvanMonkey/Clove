@@ -19,9 +19,11 @@
 #include <glad/glad.h>
 
 /// \brief Resize Frame Buffer to match window size upon resize
+/// \param window Context window
+/// \param width Width of the window
+/// \param height Height of the window
 void resizeFrameBuffer(GLFWwindow* window, int width, int height);
 
 /// \brief Do *Blank* every frame
 /// \param window Context Window
-/// \param running Is Program Running?
 void Tick(GLFWwindow* window);

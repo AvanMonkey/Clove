@@ -86,19 +86,27 @@ public:
 	const void use();
 
 	/// \brief Shader's Boolean Uniform Setter
-	void setBool(const std::string& name, bool value) const; // Const is used here so any member variables are immutable and can't be changed
+	/// \param name Shader name
+	/// \param value Bool value being set
+	void setBool(const std::string& name, bool value) const;
 
 	/// \brief Shader's Int Uniform Setter
+	/// \param name Shader name
+	/// \param value Int value being set
 	void setInt(const std::string& name, int value) const;
 
 	/// \brief Shader's Float Uniform Setter (Usualy Colour)
+	/// \param name Shader name
+	/// \param r Red value
+	/// \param g Green value
+	/// \param b Blue value
+	/// \param opacity Opacity value
 	void setFloat(const std::string& name, float r, float g, float b, float opacity) const;
 
 		// End of adapted code
 
-
-
-	/// \brief Check for errors during shader compilation process
+	/// \brief Check for errors during shader compilation process#
+	/// \param errorMessage Message being displayed should an error occur
 	const void errorCheck(std::string errorMessage);
 
 	~Shaders() = default;
@@ -106,5 +114,4 @@ private:
 	/// \brief Shader's Unique ID
 	unsigned int shaderID;	// Encapsulated to prevent any accidental changes
 };
-
 #endif
