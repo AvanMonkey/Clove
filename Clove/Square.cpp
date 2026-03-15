@@ -30,7 +30,7 @@ bool Square::isColliding(Rectangle& rect)
 	float rectTop = rect.getVertices()[7];
 	float rectBottom = rect.getVertices()[1];
 
-	// Code adapted from Aristurtle Dev (2024) https://www.youtube.com/watch?v=UOfbGeq0ZkM
+	// Code adapted from Aristurtle Dev (2024)
 
 		// AABB Collision detection
 	return sqrRight > rectLeft &&
@@ -64,10 +64,11 @@ void Square::updateLocation()
 		verticesOfObject[i] -= posY;
 	}
 
-	// Code adapted from LearnOpenGL (2026)
 	ArrayObject.bindArray();
 	BufferObject.bindBuffer(GL_ARRAY_BUFFER);
 	ElementBufferObject.bindBuffer(GL_ELEMENT_ARRAY_BUFFER);
+
+	// Code adapted from LearnOpenGL (2026)
 	glEnableVertexAttribArray(0);
 
 	// Load Vertices into GPU
