@@ -48,4 +48,6 @@
 
 <p> It is recommended GLFW is installed through this method and not with the website's bin files as testing has shown that the bin files cause instability with the physics engine.</p>
 
+<a href="https://avanmonkey.github.io/Clove/">Documentation is available Here</a>
+
 <p> A link to an exe file will be provided at a later date</p>
