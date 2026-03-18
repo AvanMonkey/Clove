@@ -50,4 +50,4 @@
 
 <a href="https://avanmonkey.github.io/Clove/">Documentation is available Here</a>
 
-<p> A link to an exe file will be provided at a later date</p>
+<a href="https://github.com/AvanMonkey/Clove/releases/download/Pre-Submission/Clove.v1.0.0.zip">Download the ZIP file here</a>
